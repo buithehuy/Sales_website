@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'Sales_website.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "sales_website",
         'USER': "root",
