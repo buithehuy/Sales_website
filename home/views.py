@@ -100,7 +100,7 @@ def signup(request):
 
         return redirect('login')
 
-    return render(request, "signup.html")
+    return render(request, "register.html")
 def activate(request,uidb64,token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
