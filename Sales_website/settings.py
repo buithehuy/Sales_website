@@ -11,11 +11,15 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+from .info import *
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+EMAIL_USE_TLS = EMAIL_USE_TLS
+EMAIL_HOST = EMAIL_HOST
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+EMAIL_PORT = EMAIL_PORT
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -26,8 +30,7 @@ SECRET_KEY = 'django-insecure-)pttjpl3v@rjz=4679+@1i)$k&d!a^zaq#u2p#b*^m9j*s%_(4
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
+# APPEND_SLASH=False
 # Application definition
 
 INSTALLED_APPS = [

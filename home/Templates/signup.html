@@ -1,15 +1,10 @@
-{% extends 'base.html' %}
-  
-{% block title %}Login{% endblock %}
-  
-{% block content %}
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
+    <title>Sign Up</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- Custom CSS -->
@@ -41,6 +36,10 @@
             box-shadow: none;
         }
 
+        .form-group input[type="password"] {
+            font-family: "Courier New", Courier, monospace;
+        }
+
         .btn-primary {
             border-radius: 10px;
             width: 100%;
@@ -58,19 +57,34 @@
     {% endfor %}
 
     <div class="container">
-        <h3 class="form-title">Log In to your account!</h3>
-        <form method="post" class="mb-2">
-            {% csrf_token %}
+        <h3 class="form-title">Create your account!</h3>
+        <form method="post" action="/register/">{% csrf_token %}
+
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your Username" required>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required>
+            </div>
+            <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
             </div>
             <div class="form-group">
                 <label for="pass1">Password</label>
-                <input type="password" class="form-control" id="pass1" name="password" placeholder="Enter Your Password" required>
+                <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Log In</button>
-            <p style="color: red"> {{msg}}</p>
+            <div class="form-group">
+                <label for="pass2">Confirm Password</label>
+                <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm Your Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
     </div>
 
@@ -79,4 +93,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>-->
 </body>
 </html>
-{% endblock %}
