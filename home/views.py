@@ -15,6 +15,9 @@ from django.shortcuts import HttpResponseRedirect
 from django.contrib.sites.shortcuts import get_current_site
 from . tokens import generate_token
 import mysql.connector
+import random
+import string
+
 
 mydb = mysql.connector.connect(
     host='localhost',
@@ -81,17 +84,16 @@ def signup(request):
                          "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
 
         # Welcome Email
-        subject = "Welcome to fiftybit Django Login!!"
-        message = "Hello " + myuser.first_name + "!! \n" + "Welcome to fiftybit!! \nThank you for visiting our website\n. We have also sent you a confirmation email, please confirm your email address. \n\nThanking You\nShovit Nepal"
+        subject = "Welcome to ThreeBoys"
+        message = "Hello " + myuser.first_name + "!! \n" + "Welcome to ThreeBoys!! \nThank you for visiting our website\n. We have also sent you a confirmation email, please confirm your email address. \n\nThanking You\nShovit Nepal"
         from_email = settings.EMAIL_HOST_USER
         to_list = [myuser.email]
         send_mail(subject, message, from_email, to_list, fail_silently=True)
 
         # Email Address Confirmation Email
         current_site = get_current_site(request)
-        email_subject = "Confirm your Email @ FiftyBit - Django Login!!"
+        email_subject = "Confirm your Email !"
         message2 = render_to_string('email_confirmation.html', {
-
             'name': myuser.first_name,
             'domain': current_site.domain,
             'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
@@ -104,7 +106,6 @@ def signup(request):
             [myuser.email],
         )
         send_mail(email_subject, message2, from_email, to_list, fail_silently=True)
-
         return redirect('login')
 
     return render(request, "register.html")
@@ -128,6 +129,11 @@ def log_out(request) :
     logout (request)
     return redirect('/')
 list = []
+
+def generate_otp():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+
+
 def forget_password(request):
     if request.method == 'POST':
         username_f = request.POST["username"]
@@ -143,27 +149,49 @@ def forget_password(request):
         if len(auth) == 0:
             return render(request, 'forget_password.html', {'msg': 'Tên người dùng hoặc email không chính xác'})
         else:
-            list.append(username_f)
-            list.append(email_f)
-            return redirect('new_password')
+            otp = generate_otp()
+            # Save the OTP in the server's memory or database
+            request.session['otp'] = otp
+            request.session['email'] = email_f
+
+            # Send OTP to the user's email
+            subject = "Password Reset OTP"
+            message = f"Your OTP for password reset is: {otp}"
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [email_f]
+            send_mail(subject, message, from_email, to_list)
+
+            return redirect('otp_confirmation')
 
     return render(request, 'forget_password.html')
+
+def otp_confirmation(request):
+    if request.method == 'POST':
+        otp_entered = request.POST.get('otp')
+        if otp_entered == request.session.get('otp'):
+            # OTP is correct, proceed to new password confirmation
+            return redirect('new_password')
+        else:
+            return render(request, 'otp_confirmation.html', {'msg': 'Invalid OTP. Please try again.'})
+    return render(request, 'otp_confirmation.html')
+
 
 def new_password(request):
     if request.method == 'POST':
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
         if pass1 == pass2:
-            current_user = User.objects.get(username__exact=list[0])
+            current_user = User.objects.get(email=request.session.get('email'))
             current_user.set_password(pass1)
             current_user.save()
-            messages.success(request,"Sửa mật khẩu thành công")
-
+            messages.success(request, "Password changed successfully")
+            del request.session['otp']
+            del request.session['email']
             return redirect('login')
         else:
-            return render(request, 'new_password.html', {'msg': 'Mật khẩu không khớp'})
-
+            return render(request, 'new_password.html', {'msg': 'Passwords do not match'})
     return render(request, 'new_password.html')
+
 def log_in(request):
     if request.user.is_authenticated:
         return render(request, 'home.html')
@@ -184,5 +212,6 @@ def log_in(request):
     
 def profile(request) :
     return render(request, 'profile.html')
+
 
 

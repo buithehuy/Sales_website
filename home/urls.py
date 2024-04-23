@@ -10,6 +10,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('login/forget_password/', views.forget_password, name='forget_password'),
     path('login/forget_password/new_password/', views.new_password, name='new_password'),
+    path('login/forget_password/otp_confirmation/', views.otp_confirmation, name="otp_confirmation"),
 
 ]
 
