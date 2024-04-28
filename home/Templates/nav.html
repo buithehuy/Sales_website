@@ -1,0 +1,337 @@
+{% load static %}
+{% load cart_template_tags %}
+{% load category_template_tags %}
+
+<style>
+	.topbar {
+		background-color: white;
+		color: black !important;
+	}
+	.topbar a:hover{
+		color: black;
+	}
+</style>
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endfor %}
+<!-- Header -->
+<header class="header1">
+		<!-- Header desktop -->
+		<div class="container-menu-header">
+			<div class="topbar">
+				<div class="topbar-social">
+					<a href="#" class="topbar-social-item fab fa-facebook"></a>
+					<a href="#" class="topbar-social-item fab fa-instagram"></a>
+					<a href="#" class="topbar-social-item fab fa-pinterest-p"></a>
+					<a href="#" class="topbar-social-item fab fa-twitter"></a>
+					<a href="#" class="topbar-social-item fab fa-youtube"></a>
+				</div>
+
+				<span class="topbar-child1">
+					Free shipping for standard order over $100
+				</span>
+
+				<div class="topbar-child2">
+					{% if request.user.is_authenticated %}
+							<a href="/logout" style="margin-right: 10px">Logout</a>
+					{% else %}
+					<a href="/login" style="margin-right: 10px">Login</a>
+					<a href="/register">Register</a>
+						{% endif %}
+				</div>
+			</div>
+
+			<div class="wrap_header" style="    height: 85px;}" >
+				<!-- Logo -->
+				<div>
+				<a href="/" class="logo">
+					<p style="color: black;font-size: 40px; margin-bottom:10px"><b style="font-size: 60px;">B</b>igPC</p>
+				</a></div>
+
+				<!-- Menu -->
+				<div class="wrap_menu" style="position: absolute; top: -15%;">
+					<nav class="menu">
+						<ul class="main_menu">
+							<li style="padding:0px; padding-top:10px">
+								<div class="search-product pos-relative bo4 of-hidden" style="border-radius: 50px;width: 600px; ">
+							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+
+							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
+							</button> </div>
+							</li>
+							{% categories %}
+
+<!--							{% if request.user.is_authenticated %}-->
+<!--							<li>-->
+<!--								<div class="header-wrapicon2">-->
+<!--								<a href="home:order-summary">-->
+
+<!--&lt;!&ndash;									<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">&ndash;&gt;-->
+<!--&lt;!&ndash;						<span class="header-icons-noti">{{ request.user|cart_item_count }}</span>&ndash;&gt;-->
+<!--									</a>-->
+<!--								</div>-->
+<!--							</li>-->
+<!--							{% endif %}-->
+
+						</ul>
+
+					</nav>
+				</div>
+				<!-- Cart/profile -->
+					<div style="text-align: right; display: block;position: absolute;
+					right: 100px; transform:translateY(-15%); box-sizing:border-box;top:25% ">
+					<ul class="main_menu">
+							{% if request.user.is_authenticated %}
+						<li style="padding-top: 3px;padding-right: 5px">
+					<a href="{% url 'order-summary' %}">
+						<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<span class="header-icons-noti">{{ request.user|cart_item_count }}</span></a>
+						</li  >
+						<li style="padding-top: 3px;padding-right: 5px" >
+					<a href="#" class="header-wrapicon1 dis-block">
+						<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON"></a>
+							</li>
+						{% else %}
+						<li style="padding-top: 3px;padding-right: 5px">
+
+						<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+							<span class="header-icons-noti">{{ request.user|cart_item_count }}</span>
+							<div class="header-cart header-dropdown">
+								<div style="text-align:center">
+									<a href="/login">Login to show you cart</a>
+								</div>
+							</div>
+						</li  >
+
+						<li style="padding-top: 3px;padding-right: 5px" >
+
+						<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+							<div class="header-cart header-dropdown">
+								<div style="text-align:center">
+									<a href="/login">Login to show you profile</a>
+								</div> </div>
+							</li>
+							{% endif %}
+
+						</ul>
+					</div>
+				<!-- MENUSUB -->
+				<div class="menu-sub" style="position: absolute; top: 45%;">
+						<ul class="main_menu">
+							<li>
+								<a href="shop/">ALL</a>
+							</li>
+							<li>
+								<a href="#">PC components</a>
+								<ul class="sub_menu">
+									<li><a href= "#">Mainboard</a></li>
+									<li><a href= "#">VGA</a></li>
+									<li><a href= "#">SSD</a></li>
+									<li><a href= "#">CPU</a></li>
+									<li><a href= "#">RAM</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Gaming Gear</a>
+								<ul class="sub_menu">
+									<li><a href= "#">Headphone</a></li>
+									<li><a href= "#">Keyboard</a></li>
+									<li><a href= "#">Mouse</a></li>
+									<li><a href= "#">controller</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Screens</a>
+							</li>
+							<li>
+								<a href="#">Case</a>
+								<ul class="sub_menu">
+									<li><a href= "#">Case</a></li>
+									<li><a href= "#">PSU</a></li>
+									<li><a href= "#">Cooling</a></li>
+								</ul>
+							</li>
+						</ul>
+				</div>
+
+
+			</div>
+		</div>
+		<!-- Header Mobile -->
+		<div class="wrap_header_mobile">
+			<!-- Logo moblie -->
+			<a href="index.html" class="logo-mobile">
+				<img src="{% static 'images/icons/logo.png' %}" alt="IMG-LOGO">
+			</a>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu">
+				<!-- Header Icon mobile -->
+				<div class="header-icons-mobile">
+					<a href="#" class="header-wrapicon1 dis-block">
+						<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
+					</a>
+
+					<span class="linedivide2"></span>
+
+					<div class="header-wrapicon2">
+						<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<span class="header-icons-noti">0</span>
+
+						<!-- Header cart noti -->
+						<div class="header-cart header-dropdown">
+							<ul class="header-cart-wrapitem">
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="{% static 'images/item-cart-01.jpg' %}" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											White Shirt With Pleat Detail Back
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $19.00
+										</span>
+									</div>
+								</li>
+
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="{% static 'images/item-cart-02.jpg' %}" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											Converse All Star Hi Black Canvas
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $39.00
+										</span>
+									</div>
+								</li>
+
+								<li class="header-cart-item">
+									<div class="header-cart-item-img">
+										<img src="{% static 'images/item-cart-03.jpg' %}" alt="IMG">
+									</div>
+
+									<div class="header-cart-item-txt">
+										<a href="#" class="header-cart-item-name">
+											Nixon Porter Leather Watch In Tan
+										</a>
+
+										<span class="header-cart-item-info">
+											1 x $17.00
+										</span>
+									</div>
+								</li>
+							</ul>
+
+							<div class="header-cart-total">
+								Total: $75.00
+							</div>
+
+							<div class="header-cart-buttons">
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										View Cart
+									</a>
+								</div>
+
+								<div class="header-cart-wrapbtn">
+									<!-- Button -->
+									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										Check Out
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Menu Mobile -->
+		<div class="wrap-side-menu" >
+			<nav class="side-menu">
+				<ul class="main-menu">
+					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+						<span class="topbar-child1">
+							Free shipping for standard order over $100
+						</span>
+					</li>
+
+					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+						<div class="topbar-child2-mobile">
+							<span class="topbar-email">
+								fashe@example.com
+							</span>
+
+							<div class="topbar-language rs1-select2">
+								<select class="selection-1" name="time">
+									<option>USD</option>
+									<option>EUR</option>
+								</select>
+							</div>
+						</div>
+					</li>
+
+					<li class="item-topbar-mobile p-l-10">
+						<div class="topbar-social-mobile">
+							<a href="#" class="topbar-social-item fa fa-facebook"></a>
+							<a href="#" class="topbar-social-item fa fa-instagram"></a>
+							<a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
+							<a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
+							<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
+						</div>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="/">Home</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="/shop">Shop</a>
+					</li>
+
+					{% categories_mobile %}
+
+					{% if request.user.is_authenticated %}
+					<li class="item-menu-mobile">
+						<a href=" /core:order-summary">Cart<span class="badge badge-dark">{{ request.user|cart_item_count }}</span></a>
+					</li>
+					<li class="item-menu-mobile">
+						<a href="/logout">Logout</a>
+					</li>
+					{% else %}
+					<li class="item-menu-mobile">
+						<a href="#">Login</a>
+						<ul class="sub-menu">
+							<li><a href="{% url 'login' %}">Login</a></li>
+							<li><a href="{% url 'register' %}">SignUp</a></li>
+						</ul>
+						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+					</li>
+					{% endif %}
+
+				</ul>
+			</nav>
+		</div>
+
+</header>

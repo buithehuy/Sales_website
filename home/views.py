@@ -1,20 +1,25 @@
-from django.shortcuts import render
+
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
 from django.core.mail import EmailMessage, send_mail
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from Sales_website import settings
+from django.utils import timezone
+
 from django.contrib.auth.models import User
+from django.views.generic import ListView, DetailView, View
 from django.utils.encoding import force_bytes, force_str
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.shortcuts import HttpResponseRedirect
 from django.contrib.sites.shortcuts import get_current_site
 from . tokens import generate_token
 import mysql.connector
+from  .models import *
+from .forms import CheckoutForm, CouponForm, RefundForm
+
 import random
 import string
 
@@ -27,25 +32,19 @@ mydb = mysql.connector.connect(
 )
 # Create your views here.
 def get_home(request) :
-    return render(request, 'home.html')
 
-# def register(request) :
-#     if request.user.is_authenticated:
-#         return redirect('/')
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password1')
-#             user = authenticate(username=username, password=password)
-#             login(request, user)
-#             return redirect('/')
-#         else:
-#             return render(request, 'register.html', {'form': form})
-#     else:
-#         form = UserCreationForm()
-#         return render(request, 'register.html', {'form': form})
+    return render(request, 'index.html')
+
+def get_ordersum(request):
+    try:
+        order = Order.objects.get(user=request.user, ordered=False)
+        context = {
+                'object': order
+        }
+        return render(request, 'order_summary.html', context)
+    except ObjectDoesNotExist:
+        messages.error(request, "You do not have an active order")
+        return redirect("/")
 def signup(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -56,28 +55,25 @@ def signup(request):
         pass2 = request.POST["pass2"]
 
         if User.objects.filter(username=username):
-            messages.error(request, "Username already exist! Please try some other username.")
-            return redirect('register')
+            return render(request,'register.html', {'username_error': 'Username already exist! Please try some other username.'})
 
         if User.objects.filter(email=email).exists():
-            messages.error(request, "Email Already Registered!!")
-            return redirect('register')
+            # messages.error(request, "Email Already Registered!!")
+            return render(request,'register.html',{'email_error':'Email Already Registered!!'})
 
         if len(username) > 20:
-            messages.error(request, "Username must be under 20 charcters!!")
-            return redirect('register')
+            return render(request,'register.html',{'username_error': 'Username must be under 20 charcters!!'})
 
         if pass1 != pass2:
-            messages.error(request, "Passwords didn't matched!!")
-            return redirect('register')
+            return render(request,'register.html',{'password_error':"Passwords didn't matched!!"})
 
         if not username.isalnum():
-            messages.error(request, "Username must be Alpha-Numeric!!")
-            return redirect('register')
+            # messages.error(request, "Username must be Alpha-Numeric!!")
+            return render(request,'register.html',{'username_error': 'Username must be Alpha-Numeric!!'})
+
         myuser = User.objects.create_user(username, email, pass1)
-        myuser.fname = fname
-        myuser.lname = lname
-        # myuser.is_active = False
+        myuser.first_name = fname
+        myuser.last_name = lname
         myuser.is_active = False
         myuser.save()
         messages.success(request,
@@ -172,7 +168,7 @@ def otp_confirmation(request):
             # OTP is correct, proceed to new password confirmation
             return redirect('new_password')
         else:
-            return render(request, 'otp_confirmation.html', {'msg': 'Invalid OTP. Please try again.'})
+            return render(request, 'otp_confirmation.html', {'msg': 'Incorrect OTP. Please try again.'})
     return render(request, 'otp_confirmation.html')
 
 
@@ -194,14 +190,14 @@ def new_password(request):
 
 def log_in(request):
     if request.user.is_authenticated:
-        return render(request, 'home.html')
+        return render(request, 'index.html')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/profile') 
+            return redirect('home')
         else:
             msg = 'Error Login'
             form = AuthenticationForm(request.POST)
@@ -209,9 +205,58 @@ def log_in(request):
     else:
         form = AuthenticationForm()
         return render(request, 'login.html')
-    
+
+def get_shop(request):
+    object_list = Item.objects.all().values()
+    context = {
+        'paginate_by' : 6,
+        'object_list' : object_list,
+    }
+    return render(request, "shop.html",context)
+def get_product(request,slug):
+    product = Item.objects.get(slug=slug)
+    template_name = "product-detail.html"
+    return render(request,template_name,{'object':product})
+
+def add_to_cart(request, slug):
+    item = Item.objects.get(slug=slug)
+    order_item, created = OrderItem.objects.get_or_create(
+        item=item,
+        user=request.user,
+        ordered=False
+    )
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        if order.items.filter(item__slug=item.slug).exists():
+            order_item.quantity += 1
+            order_item.save()
+            messages.info(request, "Item qty was updated.")
+            return redirect("order-summary")
+        else:
+            order.items.add(order_item)
+            messages.info(request, "Item was added to your cart.")
+            return redirect("order-summary")
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(
+            user=request.user, ordered_date=ordered_date)
+        order.items.add(order_item)
+        messages.info(request, "Item was added to your cart.")
+    return redirect("order-summary")
+def get_category(request,slug):
+    category = Category.objects.get(slug=slug)
+    item = Item.objects.filter(category=category, is_active=True)
+    context = {
+        'object_list': item,
+        'category_title': category,
+       'category_description': category.description,
+        'category_image': category.image
+    }
+    return render(request, "category.html", context)
+
+
 def profile(request) :
     return render(request, 'profile.html')
-
 
 

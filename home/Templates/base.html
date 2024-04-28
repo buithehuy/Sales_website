@@ -1,116 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>{% block title %}Django Mysql User Authentication - Login, register and Logout{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="{% static 'base.css' %}">
-</head>
-<body>
-<!--    <style>-->
-<!--       -->
-<!--</style>-->
+  {% include "header.html" %}
+  <title>{% block head_title %}{% endblock %}</title>
+  {% block extra_head %} {% endblock %}
+  <style type="text/css">
+    .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+  </style>
+  <body class="animsition">
+    {% include "nav.html"%}
+    <div class="mt-2">
+      {% if messages %} {% for message in messages %}
+      <div
+        class="alert alert-{{ message.tags }} alert-dismissible fade show"
+        role="alert"
+      >
+        {{ message }}
 
-<!--  <div class="container">-->
-  <header>
-<!--    <h1>Django Mysql User Authentication - Login, register and Logout</h1>-->
-    <body class="antialiased" style="margin: 0px; padding: 0px">
-	<!-- navbar -->
-    <div class="navbar">
-      <div class="nav-logo">
-        <a href="/">ThreeBoys</a>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="nav-items" style="margin-top:20px">
-        <ul>
-          <li><a href="#"> Home </a></li>
-          <li><a href="#"> Services </a></li>
-          <li><a href="#"> About </a></li>
-          <li><a href="#"> Contact </a></li>
-          <li><a href="#"> Home </a></li>
-        </ul>
-      </div>
-        {% if user.is_authenticated %}
-
-      <div class="nav-button">
-        <div class="anim-layer"></div>
-        <a href="/logout">Log out</a>
-
-        {% else %}
-        <div class="nav-button">
-        <div class="anim-layer"></div>
-        <a href="/register">Register</a>
-      </div>
-        <div class="nav-button">
-        <div class="anim-layer"></div>
-        <a href="/login">Login</a>
-      </div>
-        {% endif %}
-
-      <div id="hamburger-menu">&#9776;</div>
     </div>
 
-    <div id="mobile-menu">
-      <div class="mobile-nav-items">
-        <ul>
-          <li><a href="#"> Home </a></li>
-          <li><a href="#"> Services </a></li>
-          <li><a href="#"> About </a></li>
-          <li><a href="#"> Contact </a></li>
-          <li><a href="#"> Home </a></li>
-        </ul>
-      </div>
-      {% if user.is_authenticated %}
-       <div class="mobile-nav-button">
-        <div class="anim-layer"></div>
-        <a href="/logout"> Log out</a>
-      </div>
-      {% else %}
-      <div class="mobile-nav-button">
-        <div class="anim-layer"></div>
-        <a href="/register">Register</a>
-      </div>
-        <div class="mobile-nav-button">
-        <div class="anim-layer"></div>
-        <a href="/login">Login</a>
-      </div>
-      {% endif %}
-      <div id="hamburger-cross">&#10006;</div>
-    </div>
-  </header>
+    {% endfor %} 
+    {% endif %} 
 
-  <main>
-<script>var getHubergerIcon = document.getElementById("hamburger-menu");
-    var getHubergerCrossIcon = document.getElementById("hamburger-cross");
-    var getMobileMenu = document.getElementById("mobile-menu");
+    {% block content %} 
+    {% endblock content %}
 
-    getHubergerIcon.addEventListener("click", function () {
-        console.log("hello");
-        getMobileMenu.style.display = "flex";
-        setTimeout(function () {
-            getMobileMenu.style.transform = "translateX(0%)"; // Slide in the menu
-        }, 50); // Add a small delay for better transition effect
-    });
+     {% block extra_body %} 
+     {% endblock %} 
 
-    getHubergerCrossIcon.addEventListener("click", function () {
-        console.log("hello");
-        getMobileMenu.style.transform = "translateX(-100%)"; // Slide out the menu
-        setTimeout(function () {
-            getMobileMenu.style.display = "none";
-        }, 300); // Wait for the transition to end before hiding
-    });
+    {% include "footer.html"%} 
+    {% include "script.html"%}
 
-    // Check if screen size changes to desktop view and hide mobile menu
-    window.addEventListener("resize", function () {
-        if (window.innerWidth > 770) {
-            getMobileMenu.style.display = "none";
-        }
-    });</script>
-
-    {% block content %}
-
-    {% endblock %}
-  </main>
-  </div>
-</body>
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
+  </body>
 </html>
