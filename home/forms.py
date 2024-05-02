@@ -2,6 +2,8 @@ from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 
+from home.models import Profile
+
 PAYMENT_CHOICES = (
     ('S', 'Stripe'),
     ('P', 'PayPal')
@@ -43,3 +45,22 @@ class RefundForm(forms.Form):
         'rows': 4
     }))
     email = forms.EmailField()
+
+
+class ProfileForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=255)
+    last_name = forms.CharField(max_length=255)
+    email = forms.EmailField()
+
+    class Meta:
+        model = Profile
+        fields = '__all__'
+        exclude = ['user']
+
+
+def form_validation_error(form):
+    msg = ""
+    for field in form:
+        for error in field.errors:
+            msg += "%s: %s \\n" % (field.label if hasattr(field, 'label') else 'Error', error)
+    return msg
