@@ -40,7 +40,7 @@
 <!--            </div>-->
 <!--        </div>-->
 
-        <form action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
+        <form  method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
                 <div class="col-12 col-xl-8">
@@ -50,9 +50,10 @@
                             <div class="col-md-6 mb-3">
                                 <div>
                                     <label for="first_name">First Name</label>
+
                                     <input name="first_name" class="form-control" id="first_name" type="text"
                                            placeholder="Enter your first name" value="{{ request.user.first_name }}"
-                                           readonly>
+                                           >
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -60,24 +61,29 @@
                                     <label for="last_name">Last Name</label>
                                     <input name="last_name" class="form-control" id="last_name" type="text"
                                            placeholder="Also your last name" value="{{ request.user.last_name }}"
-                                           readonly>
+                                           >
                                 </div>
                             </div>
+
                         </div>
                         <div class="row align-items-center">
                             <div class="col-md-6 mb-3">
                                 <label for="birthday">Birthday</label>
                                 <div class="input-group">
-<!--                                    profile.birthday|date:'m/d/Y'|default:''-->
                                     <span class="input-group-text"><span class="far fa-calendar-alt"></span></span>
                                     <input name="birthday" data-datepicker="" class="form-control" id="birthday"
-                                           type="text" placeholder="dd/mm/yyyy" value="{{ User_info.birth_date }} " required readonly>
+                                           type="date" placeholder="dd/mm/yyyy" value="{{ profile.birthday|date:'m/d/Y'|default:'' }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="gender">Gender</label>
-                                <input name="gender" class="form-control" id="gender"
-                                        aria-label="Gender select example" value="{{ User_info.gender }}" readonly>
+                               <select name="gender" class="form-select mb-0" id="gender"
+                                        aria-label="Gender select example">
+                                    <option selected>Gender</option>
+                                    <option >Male</option>
+                                    <option >Female</option>
+                                    <option >Other</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row">
@@ -86,7 +92,7 @@
                                     <label for="email">Email</label>
 
                                     <input name="email" class="form-control" id="email" type="email"
-                                           placeholder="name@company.com" value="{{ request.user.email }}" readonly>
+                                           placeholder="name@company.com" value="{{ request.user.email }}" readonly >
 
                                 </div>
                             </div>
@@ -94,7 +100,7 @@
                                 <div class="form-group">
                                     <label for="phone">Phone</label>
                                     <input name="phone" class="form-control" id="phone" type="tel"
-                                           placeholder="+12-345 678 910" value="{{ User_info.phone }}" required readonly>
+                                           placeholder="+12-345 678 910" value="{{ User_info.phone }}" required>
                                 </div>
                             </div>
                         </div>
@@ -104,14 +110,14 @@
                                 <div class="form-group">
                                     <label for="address">Address</label>
                                     <input name="address" class="form-control" id="address" type="text"
-                                           placeholder="Enter your home address" value="{{ User_info.address }}" required readonly>
+                                           placeholder="Enter your home address" value="{{ User_info.address|default:'' }}" required>
                                 </div>
                             </div>
                             <div class="col-sm-3 mb-3">
 <!--                                <div class="form-group">-->
 <!--                                    <label for="number">Number</label>-->
 <!--                                    <input name="number" class="form-control" id="number" type="number"-->
-<!--                                           placeholder="No." value="{{ profile.number|default:'' }}" required readonly>-->
+<!--                                           placeholder="No." value="{{ User_info.number|default:'' }}" required>-->
 <!--                                </div>-->
                             </div>
                         </div>
@@ -120,20 +126,20 @@
                                 <div class="form-group">
                                     <label for="city">City</label>
                                     <input name="city" class="form-control" id="city" type="text" placeholder="City"
-                                           value="{{ User_info.city }}" required readonly>
+                                           value="{{ User_info.city|default:'' }}" required>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="district">District</label>
-                                    <input name="district" class="form-control" id="district" type="tel" placeholder="District" value="{{ User_info.district}}"
-                                            required readonly>
+                                    <input name="district" class="form-control" id="district" type="tel" placeholder="District" value="{{ User_info.district }}"
+                                            required>
                                 </div>
                             </div>
                         </div>
                         <div class="mt-3">
                             <button type="submit" class="btn btn-primary">Save All</button>
-                            <a href="/profile_edit" type="submit" style="background-color: #ffaaff; border-style: #ffaaff" class="btn btn-primary">Edit</a>
+
 
                         </div>
                     </div>
@@ -142,45 +148,44 @@
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="card border-light text-center p-0">
-                                <div class="profile-cover rounded-top" style="background-image: url({% static 'images/pc-gaming.png' %});"
-                                     data-background="{% static 'images/banner-13.jpg' %}"></div>
+                                <div class="profile-cover rounded-top"
+                                     data-background="/static/assets/img/profile-cover.jpg"></div>
                                 <div class="card-body pb-5">
-                                    <img src="/media/{{User_info.image }}" style="height: 200px;"
+                                    <img src="/media/{{User_info.image }} " style="height: 200px;"
                                          class="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4"
                                          alt="Neil Portrait">
-                                    <h4 class="h3">{{ request.user.first_name }} </h4>
+                                    <h4 class="h3">{{  request.user.first_name }}</h4>
                                     <h4 class="font-weight-normal">{{ request.user.first_name }} {{ request.user.last_name }}</h4>
                                     <h5 class="font-weight-normal">
                                         {{ request.user.email }}
                                     </h5>
-                                    <p class="text-gray mb-4">{{ User_info.address|default:'' }} - {{ User_info.district }} - {{ User_info.city }} </p>
 <!--                                    <a class="btn btn-sm btn-primary mr-2" href="#"><span-->
 <!--                                            class="fas fa-user-plus mr-1"></span> Connect</a>-->
 <!--                                    <a class="btn btn-sm btn-secondary" href="#">Send Message</a>-->
                                 </div>
                             </div>
                         </div>
-<!--                        <div class="col-12">-->
-<!--                            <div class="card card-body bg-white border-light shadow-sm mb-4">-->
-<!--                                <h2 class="h5 mb-4">Select profile photo</h2>-->
-<!--                                <div class="d-xl-flex align-items-center">-->
-<!--                                    <div class="file-field">-->
-<!--                                        <div class="d-flex justify-content-xl-center ml-xl-3">-->
-<!--                                            <div class="d-flex">-->
-<!--                                                <span class="icon icon-md">-->
-<!--                                                    <span class="fas fa-paperclip mr-3"></span>-->
-<!--                                                </span>-->
-<!--                                                <input name="avatar" type="file">-->
-<!--                                                <div class="d-md-block text-left">-->
-<!--                                                    <div class="font-weight-normal text-dark mb-1">Choose Image</div>-->
-<!--                                                    <div class="text-gray small">JPG, GIF or PNG. Max size of 800K</div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <div class="col-12">
+                            <div class="card card-body bg-white border-light shadow-sm mb-4">
+                                <h2 class="h5 mb-4">Select profile photo</h2>
+                                <div class="d-xl-flex align-items-center">
+                                    <div class="file-field">
+                                        <div class="d-flex justify-content-xl-center ml-xl-3">
+                                            <div class="d-flex">
+                                                <span class="icon icon-md">
+                                                    <span class="fas fa-paperclip mr-3"></span>
+                                                </span>
+                                                <input name="avatar" type="file" required>
+                                                <div class="d-md-block text-left">
+                                                    <div class="font-weight-normal text-dark mb-1">Choose Image</div>
+                                                    <div class="text-gray small">JPG, GIF or PNG. Max size of 800K</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -65,7 +65,7 @@
 								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
 							</button> </div>
 							</li>
-							{% categories %}
+<!--							{% categories %}-->
 
 <!--							{% if request.user.is_authenticated %}-->
 <!--							<li>-->
@@ -124,8 +124,9 @@
 				<!-- MENUSUB -->
 				<div class="menu-sub" style="position: absolute; top: 45%;">
 						<ul class="main_menu">
+<!--								{% categories %}-->
 							<li>
-								<a href="shop/">ALL</a>
+								<a href="{% url 'shop' %}">ALL</a>
 							</li>
 							<li>
 								<a href="#">PC components</a>
@@ -141,7 +142,7 @@
 								<a href="#">Gaming Gear</a>
 								<ul class="sub_menu">
 									<li><a href= "#">Headphone</a></li>
-									<li><a href= "#">Keyboard</a></li>
+									<li><a href= "/category/keyboard">Keyboard</a></li>
 									<li><a href= "#">Mouse</a></li>
 									<li><a href= "#">controller</a></li>
 								</ul>

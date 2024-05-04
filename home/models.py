@@ -14,6 +14,12 @@ CATEGORY_CHOICES = (
     ('SK', 'Skirts'),
     ('HS', 'Hoodies&Sweatshirts')
 )
+GENDER_CHOICES = (
+    ('M','Male'),
+    ('F','Female'),
+    ('0','Other')
+
+)
 
 LABEL_CHOICES = (
     ('S', 'sale'),
@@ -25,6 +31,18 @@ ADDRESS_CHOICES = (
     ('B', 'Billing'),
     ('S', 'Shipping'),
 )
+
+class InfoUser(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    birth_date = models.DateField()
+    phone = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    district = models.CharField(max_length=100)
+    gender = models.CharField(max_length=100)
+    image = models.ImageField(default=None)
+
 
 
 class Slide(models.Model):
@@ -64,6 +82,8 @@ class Item(models.Model):
     description_short = models.CharField(max_length=50)
     description_long = models.TextField()
     image = models.ImageField()
+    image2 = models.ImageField(default=None)
+    image3 = models.ImageField(default=None)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):

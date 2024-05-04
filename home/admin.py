@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Item, OrderItem, Order, Payment, Coupon, Refund, BillingAddress, Category, Slide
+from .models import Item, OrderItem, Order, Payment, Coupon, Refund, BillingAddress, Category, Slide,InfoUser
 
 
 # Register your models here.
@@ -78,6 +78,12 @@ class ItemAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     actions = [copy_items]
 
+class InfoUserAdmin(admin.ModelAdmin):
+    list_display = [
+        'birth_date',
+        'address',
+        'phone'
+    ]
 class CategoryAdmin(admin.ModelAdmin):
     list_display = [
         'title',
@@ -97,3 +103,4 @@ admin.site.register(Payment)
 admin.site.register(Coupon)
 admin.site.register(Refund)
 admin.site.register(BillingAddress, AddressAdmin)
+admin.site.register(InfoUser, InfoUserAdmin)

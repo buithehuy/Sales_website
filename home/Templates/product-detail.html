@@ -32,15 +32,15 @@
 							</div>
 						</div>
 
-						<div class="item-slick3" data-thumb="{% static 'images/product-detail2.jpg' %}">
+						<div class="item-slick3" data-thumb="{{ object.image2.url }}">
 							<div class="wrap-pic-w">
-								<img src="{% static 'images/product-detail2.jpg' %}" alt="IMG-PRODUCT">
+								<img src="{{ object.image2.url }}" alt="IMG-PRODUCT">
 							</div>
 						</div>
 
-						<div class="item-slick3" data-thumb="{% static 'images/product-detail3.jpg' %}">
+						<div class="item-slick3" data-thumb="{{ object.image3.url }}">
 							<div class="wrap-pic-w">
-								<img src="{% static 'images/product-detail3.jpg' %}" alt="IMG-PRODUCT">
+								<img src="{{ object.image3.url }}" alt="IMG-PRODUCT">
 							</div>
 						</div>
 					</div>
@@ -75,33 +75,33 @@
 				<div class="p-t-33 p-b-60">
 					<div class="flex-m flex-w p-b-10">
 						<div class="s-text15 w-size15 t-center">
-							Size
+<!--							Size-->
 						</div>
 
 						<div class="rs2-select2 rs3-select2 w-size16">
-							<select class="form-control" name="size">
-								<option>Choose an option</option>
-								<option>S</option>
-								<option>M</option>
-								<option>L</option>
-								<option>XL</option>
-							</select>
+<!--							<select class="form-control" name="size">-->
+<!--								<option>Choose an option</option>-->
+<!--								<option>S</option>-->
+<!--								<option>M</option>-->
+<!--								<option>L</option>-->
+<!--								<option>XL</option>-->
+<!--							</select>-->
 						</div>
 					</div>
 
 					<div class="flex-m flex-w">
 						<div class="s-text15 w-size15 t-center">
-							Color
+<!--							Color-->
 						</div>
 
 						<div class="rs2-select2 rs3-select2 w-size16">
-							<select class="form-control" name="color">
-								<option>Choose an option</option>
-								<option>Gray</option>
-								<option>Red</option>
-								<option>Black</option>
-								<option>Blue</option>
-							</select>
+<!--							<select class="form-control" name="color">-->
+<!--								<option>Choose an option</option>-->
+<!--								<option>Gray</option>-->
+<!--								<option>Red</option>-->
+<!--								<option>Black</option>-->
+<!--								<option>Blue</option>-->
+<!--							</select>-->
 						</div>
 					</div>
 
@@ -127,7 +127,9 @@
 							</div>
 <!--				href="{object.get_remove_from_cart_url}"			href="{ object.get_add_to_cart_url }"-->
 							<a href="{% url 'add-to-cart' object.slug %}" class="btn btn-primary" style="margin: 2px;">Add to Cart</a>
-							<a  class="btn btn-outline-dark" style="margin: 2px;">Remove from Cart</a>
+							{% for order_item in order.items.all %}
+							<a  href="{% url 'remove-from-cart' order_item.item.slug %}" class="btn btn-outline-dark" style="margin: 2px;">Remove from Cart</a>
+							   {% endfor %}
 						</div>
 					</div>
 				</div>

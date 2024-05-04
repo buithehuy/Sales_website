@@ -72,6 +72,10 @@ def signup(request):
             return render(request,'register.html',{'username_error': 'Username must be Alpha-Numeric!!'})
 
         myuser = User.objects.create_user(username, email, pass1)
+        InfoUser.objects.create(
+            user=myuser,
+            birth_date= timezone.now()
+        )
         myuser.first_name = fname
         myuser.last_name = lname
         myuser.is_active = False
@@ -215,9 +219,36 @@ def get_shop(request):
     return render(request, "shop.html",context)
 def get_product(request,slug):
     product = Item.objects.get(slug=slug)
+    order = Order.objects.get(user=request.user, ordered=False)
     template_name = "product-detail.html"
-    return render(request,template_name,{'object':product})
+    return render(request,template_name,{'object':product,'order':order})
 
+def add_to_cart(request, slug):
+    item = Item.objects.get(slug=slug)
+    order_item, created = OrderItem.objects.get_or_create(
+        item=item,
+        user=request.user,
+        ordered=False
+    )
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        if order.items.filter(item__slug=item.slug).exists():
+            order_item.quantity += 1
+            order_item.save()
+            messages.info(request, "Item qty was updated.")
+            return redirect("order-summary")
+        else:
+            order.items.add(order_item)
+            messages.info(request, "Item was added to your cart.")
+            return redirect("order-summary")
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(
+            user=request.user, ordered_date=ordered_date)
+        order.items.add(order_item)
+        messages.info(request, "Item was added to your cart.")
+    return redirect("order-summary")
 def add_to_cart(request, slug):
     item = Item.objects.get(slug=slug)
     order_item, created = OrderItem.objects.get_or_create(
@@ -255,11 +286,6 @@ def get_category(request,slug):
     }
     return render(request, "category.html", context)
 
-
-def profile(request) :
-    return render(request, 'profile.html')
-
-
 def get_checkout(request):
         try:
             order = Order.objects.get(user=request.user, ordered=False)
@@ -292,6 +318,8 @@ def remove_from_cart(request, slug):
                 ordered=False
             )[0]
             order.items.remove(order_item)
+            order_item.quantity = 1
+            order_item.save()
             messages.info(request, "Item was removed from your cart.")
             return redirect("order-summary")
         else:
@@ -403,4 +431,38 @@ def post_refund(request):
                 return redirect("request-refund")
 
 def profile(request):
-    return render(request, 'profile.html')
+    user_info = InfoUser.objects.get(user = request.user)
+    return render(request, 'profile.html',{'User_info': user_info})
+
+def profile_edit(request):
+    user_info = InfoUser.objects.get(user = request.user)
+
+    if request.method == "POST":
+        first_name = request.POST["first_name"]
+        last_name = request.POST["last_name"]
+        birth_date = request.POST['birthday']
+        gender = request.POST['gender']
+        phone = request.POST['phone']
+        address = request.POST['address']
+        city = request.POST['city']
+        district = request.POST['district']
+        image = request.FILES['avatar']
+
+        my_user = request.user
+        my_user.last_name = last_name
+        my_user.first_name = first_name
+
+        my_info = InfoUser.objects.get(user = request.user)
+        my_info.birth_date = birth_date
+        my_info.gender = gender
+        my_info.phone = phone
+        my_info.address = address
+        my_info.city = city
+        my_info.district = district
+        my_info.image = image
+
+        my_info.save()
+        my_user.save()
+        return redirect('/profile')
+
+    return render(request, 'profile_edit.html',{'User_info': user_info})
