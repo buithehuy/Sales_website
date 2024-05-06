@@ -201,7 +201,10 @@ def log_in(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            if user.is_superuser:
+                return redirect('admin:index')
+            else:
+                return redirect('home')
         else:
             msg = 'Error Login'
             form = AuthenticationForm(request.POST)
