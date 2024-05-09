@@ -9,6 +9,8 @@ from django.contrib import messages
 from Sales_website import settings
 from django.utils import timezone
 
+from django.db.models import F, FloatField, ExpressionWrapper
+
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, View
 from django.utils.encoding import force_bytes, force_str
@@ -278,16 +280,30 @@ def add_to_cart(request, slug):
         order.items.add(order_item)
         messages.info(request, "Item was added to your cart.")
     return redirect("order-summary")
-def get_category(request,slug):
+
+
+def get_category(request, slug):
     category = Category.objects.get(slug=slug)
-    item = Item.objects.filter(category=category, is_active=True)
+    items = Item.objects.filter(category=category, is_active=True)
+
+    sorting = request.GET.get('sorting')
+    if sorting == 'deepest_discount':
+        items = items.filter(discount_price__isnull=False).annotate(
+            discount_ratio=ExpressionWrapper(F('discount_price') / F('price'), output_field=FloatField())
+        ).order_by('discount_ratio')
+    elif sorting == 'price_asc':
+        items = items.order_by('price')
+    elif sorting == 'price_desc':
+        items = items.order_by('-price')
+
     context = {
-        'object_list': item,
+        'object_list': items,
         'category_title': category,
-       'category_description': category.description,
+        'category_description': category.description,
         'category_image': category.image
     }
     return render(request, "category.html", context)
+
 
 def get_checkout(request):
         try:
@@ -469,3 +485,4 @@ def profile_edit(request):
         return redirect('/profile')
 
     return render(request, 'profile_edit.html',{'User_info': user_info})
+

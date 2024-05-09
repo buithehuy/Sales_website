@@ -250,3 +250,6 @@ class Profile(models.Model):
     @property
     def get_avatar(self):
         return self.avatar.url
+
+
+

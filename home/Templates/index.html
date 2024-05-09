@@ -2,6 +2,7 @@
 {% load static %}
 {% load category_template_tags %}
 {% load slide_template_tags %}
+
 {% block content %}
 <style>
 	/*[ Block2 ]
@@ -62,7 +63,7 @@
 </style>
 
 	<!-- Slide1 -->
-	<section class="slide1">
+	{% comment %} <section class="slide1">
 		<div class="wrap-slick1">
 			<div class="slick1">
 
@@ -87,7 +88,7 @@
 
 			</div>
 		</div>
-	</section>
+	</section> {% endcomment %}
 
 	<!-- Category start -->
 	<style>
@@ -100,80 +101,57 @@
 	<section class="banner bgwhite p-t-40 p-b-40" >
 		<div class="container">
 			<div class="row">
-
-				{% categories_div %}
-
-
-				<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
-
-					<div class="block1 hov-img-zoom pos-relative m-b-30">
-						<img src="{% static 'images/asus_screen.jpg' %}" alt="IMG-BENNER">
-						<div class="block1-wrapbtn w-size2">
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-								Screen
-							</a>
-						</div>
-					</div>
-
-					<div class="block1 hov-img-zoom pos-relative m-b-30">
-						<img src="{% static 'images/mouse1.webp' %}" alt="IMG-BENNER">
-						<div class="block1-wrapbtn w-size2">
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-								Mouse
-							</a>
-						</div>
-					</div>
-
-
+				<div class="leftbar" style=" height: 570px;overflow-y: auto; width : 34%">
+					{% categories_div %}
 				</div>
 
-				<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
-
-					<div class="block1 hov-img-zoom pos-relative m-b-30">
-						<img src="{% static 'images/screen2.jpg' %}" alt="IMG-BENNER">
-						<div class="block1-wrapbtn w-size2">
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-								Screen
+				<section class="slide1" style="width: 66%">
+					<div class="wrap-slick1">
+						<a  href="/shop">
+							<div class="slick1">
+				
+								{% slides %}
+				
+								<div class="item-slick1 item2-slick1 " style="background-image: url({% static 'images/t5sale.jpg' %});">
+									<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+										<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rollIn">
+											
+										</span>
+										<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="lightSpeedIn">
+											
+										</h2>
+										<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
+											<!-- Button -->
+											{% comment %} <a href="/shop" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+												Mua sắm ngay
+											</a> {% endcomment %}
+										</div>
+									</div>
+								</div>
 							</a>
+			
 						</div>
 					</div>
-
-					<div class="block1 hov-img-zoom pos-relative m-b-30">
-						<img src="{% static 'images/keyboard1.webp' %}" alt="IMG-BENNER">
-						<div class="block1-wrapbtn w-size2">
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-								Keyboard
-							</a>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
-
-					<div class="block1 hov-img-zoom pos-relative m-b-30">
-						<img src="{% static 'images/screen3.jpg' %}" alt="IMG-BENNER">
-						<div class="block1-wrapbtn w-size2">
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-								Screen
-							</a>
-						</div>
-					</div>
-
-					<div class="block1 hov-img-zoom pos-relative m-b-30">
-						<img src="{% static 'images/headphone1.webp' %}" alt="IMG-BENNER">
-						<div class="block1-wrapbtn w-size2">
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
-								Headphone
-							</a>
-						</div>
-					</div>
+				</section>
 
 
-				</div>
 			</div>
+			
+
 		</div>
 	</section>
+	
+	{% comment %} <div class="container">
+		<div class="row">
+			{% items_div %}
+		</div>
+	</div> {% endcomment %}
+
+
+
+					
+
+
 
 	<!-- New Product -->
 	<style>
@@ -183,72 +161,18 @@
 		}
 	</style>
 	<section class="newproduct bgwhite p-t-45 p-b-105">
-		<div class="container">
-			<div class="sec-title p-b-60">
-				<h3 class="m-text5 t-center">
-					Featured Products
+		<div class="container bg0 wrap-pic-cir-km" >
+			<div class="sec-title p-b-60 ">
+				<h3 class="m-text9 t-left " style = "margin-top:50px;">
+					Khuyến mãi hot 🔥🔥🔥
 				</h3>
 			</div>
-
-			<!-- Slide2 -->
-			<div class="wrap-slick2">
-				<div class="slick2">
-
-					{% for item in object_list %}
-					
-					<div class="item-slick2 p-l-15 p-r-15">
-						<!-- Block2 -->
-						<div class="block2">
-							
-							<div class="block2-img wrap-pic-w of-hidden pos-relative block2-label{{item.get_label_display}}">
-								<a href="{{item.get_absolute_url}}">
-								<img src="{{ item.image.url }}" alt="IMG-PRODUCT" 
-								style="height: 370px; width:100%; "></a>
-							   
-
-								 <div class="block2-overlay trans-0-4">
-									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-									</a>
-
-
-								</div>
-							</div>
-							
-
-							<div class="block2-txt p-t-20">
-								<a href="{{item.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5" style="color: black;">
-									{{ item.title }}
-								</a>
-
-								{% if item.discount_price %}
-								<span class="block2-oldprice m-text7 p-r-5" style="color: black;">
-									${{ item.price }}
-								</span>
-
-								<span class="block2-newprice m-text8 p-r-5">
-									${{ item.discount_price }}
-								</span>
-								{% else %}
-								<span class="block2-price m-text6 p-r-5" style="color: black;">
-									${{ item.price }}
-								</span>
-								{% endif %}
-								
-
-								
-							</div>
-							
-						</div>
-					</div>
-				
-					{% endfor %}
-
-					
-				
+			<div class="container ">
+				<div class="row">
+					{% deepest_discount_items %}
 				</div>
 			</div>
+			
 
 		</div>
 	</section>

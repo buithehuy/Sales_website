@@ -546,6 +546,13 @@ iframe {
   display: flex;
   justify-content: center;
   align-items: center;
+  
+}
+.topbar a{
+		color: #fff;
+}
+.topbar a:hover{
+    scale: 110%;
 }
 
 
@@ -567,7 +574,7 @@ iframe {
 
 .topbar-social-item {
   font-size: 18px;
-  color: #888888;
+  color: #fff;
   padding: 10px;
 }
 
@@ -576,7 +583,7 @@ iframe {
 .topbar-child1 {
   font-family: Montserrat-Regular;
   font-size: 13px;
-  color: #888888;
+  color: #fff;
   line-height: 1.7;
 }
 
@@ -1889,6 +1896,8 @@ li.sale-noti > a {
   height: 4px;
   border: none;
   background-color: #e1e1e1;
+
+
 }
 .leftbar #filter-bar .noUi-connect {
   background-color: #c5c5c5;
@@ -1913,6 +1922,21 @@ li.sale-noti > a {
 .leftbar #filter-bar .noUi-handle:after {
   display: none;
 }
+
+
+
+
+.custom-leftbar #filter-bar {
+  margin-right: 0;
+  margin-left: 0; 
+  height: 4px;
+  border: none;
+  background-color: #e1e1e1;
+  justify-content: center;
+}
+
+
+
 
 /*[ Filter Color ]
 ///////////////////////////////////////////////////////////
@@ -2345,5 +2369,4 @@ input.num-product::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; 
 }
-
 

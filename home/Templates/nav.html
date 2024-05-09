@@ -2,15 +2,7 @@
 {% load cart_template_tags %}
 {% load category_template_tags %}
 
-<style>
-	.topbar {
-		background-color: white;
-		color: black !important;
-	}
-	.topbar a:hover{
-		color: black;
-	}
-</style>
+
 {% for message in messages %}
     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
         <strong>Message:</strong> {{ message }}
@@ -23,27 +15,25 @@
 <header class="header1">
 		<!-- Header desktop -->
 		<div class="container-menu-header">
-			<div class="topbar">
+			<div class="topbar"style="background-color: black; color: white;">
 				<div class="topbar-social">
-					<a href="#" class="topbar-social-item fab fa-facebook"></a>
-					<a href="#" class="topbar-social-item fab fa-instagram"></a>
-					<a href="#" class="topbar-social-item fab fa-pinterest-p"></a>
-					<a href="#" class="topbar-social-item fab fa-twitter"></a>
-					<a href="#" class="topbar-social-item fab fa-youtube"></a>
+					<a href="#" class="topbar-social-item fab fa-youtube">   Youtube: Demo sản phẩm </a>
 				</div>
 
 				<span class="topbar-child1">
-					Free shipping for standard order over $100
+					Thành viên: <strong>Bùi Thế Huy, Đức Anh, Cao Tuấn Anh</strong> | MÃ SV: <strong>22022667,22022 ,22022 ,</strong> |  <strong>Trường Đại học Công Nghệ - Đại học quốc gia Hà Nội </strong>
 				</span>
+				
+				
 
-				<div class="topbar-child2">
+				{% comment %} <div class="topbar-child2">
 					{% if request.user.is_authenticated %}
 							<a href="/logout" style="margin-right: 10px">Logout</a>
 					{% else %}
 					<a href="/login" style="margin-right: 10px">Login</a>
 					<a href="/register">Register</a>
 						{% endif %}
-				</div>
+				</div> {% endcomment %}
 			</div>
 
 			<div class="wrap_header" style="    height: 85px;}" >
@@ -54,16 +44,21 @@
 				</a></div>
 
 				<!-- Menu -->
-				<div class="wrap_menu" style="position: absolute; top: -15%;">
+				<div class="wrap_menu" style="position: absolute; top: -5%;">
 					<nav class="menu">
 						<ul class="main_menu">
 							<li style="padding:0px; padding-top:10px">
-								<div class="search-product pos-relative bo4 of-hidden" style="border-radius: 50px;width: 600px; ">
-							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+								<div class="search-product pos-relative bo4 of-hidden" style="border-radius: 5px;border-color: black; width: 1000px;height: 50px; ">
+									<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+		
+									<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+									<i class="fs-12 fa fa-search" aria-hidden="true"></i>
+									</button>
+								</div>
 
-							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
-							</button> </div>
+								
+
+						
 							</li>
 <!--							{% categories %}-->
 
@@ -85,47 +80,56 @@
 				</div>
 				<!-- Cart/profile -->
 					<div style="text-align: right; display: block;position: absolute;
-					right: 100px; transform:translateY(-15%); box-sizing:border-box;top:25% ">
+					right: 50px; transform:translateY(-15%); box-sizing:border-box;top:25% ">
 					<ul class="main_menu">
 							{% if request.user.is_authenticated %}
-						<li style="padding-top: 3px;padding-right: 5px">
-					<a href="{% url 'order-summary' %}">
-						<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">{{ request.user|cart_item_count }}</span></a>
-						</li  >
-						<li style="padding-top: 3px;padding-right: 5px" >
-					<a href="{% url 'profile' %}" class="header-wrapicon1 dis-block">
-						<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON"></a>
-							</li>
+								<li style="padding-top: 3px;padding-right: 5px">
+									<a href="{% url 'order-summary' %}">
+										<span class="icon" style="font-size: 35px;"><ion-icon name="cart"></ion-icon></span>
+										<span class="header-icons-noti">{{ request.user|cart_item_count }}</span>
+									</a>
+								</li  >
+
+								<li style="display: flex; align-items: center; padding-top: 3px; padding-right: 5px;">
+									<span class="icon" style="margin-right: 5px; font-size : 30px;"><ion-icon name="person"></ion-icon></span>
+									<a href="{% url 'profile' %}">Your profile</a>
+								</li>
 						{% else %}
 						<li style="padding-top: 3px;padding-right: 5px">
-
-						<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+							<span class="icon"><ion-icon name="cart"></ion-icon></span>
+							{% comment %} <img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON"> {% endcomment %}
 							<span class="header-icons-noti">{{ request.user|cart_item_count }}</span>
 							<div class="header-cart header-dropdown">
 								<div style="text-align:center">
 									<a href="/login">Login to show you cart</a>
 								</div>
 							</div>
+							<style>
+								ion-icon[name="cart"] {
+									font-size: 35px; /* Điều chỉnh kích thước của biểu tượng */
+								}
+							</style>
 						</li  >
 
-						<li style="padding-top: 3px;padding-right: 5px" >
-
-						<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-							<div class="header-cart header-dropdown">
-								<div style="text-align:center">
-									<a href="/login">Login to show you profile</a>
-								</div> </div>
-							</li>
+						<li style="display: flex; align-items: center; padding-top: 3px; padding-right: 5px;">
+							<span class="icon" style="margin-right: 5px;"><ion-icon name="person"></ion-icon></span>
+							<a href="/login">Đăng Nhập</a>
+						</li>
+						
+						<style>
+							ion-icon[name="person"] {
+								font-size: 30px; /* Điều chỉnh kích thước của biểu tượng */
+							}
+						</style>
 							{% endif %}
 
 						</ul>
 					</div>
 				<!-- MENUSUB -->
 				<div class="menu-sub" style="position: absolute; top: 45%;">
-						<ul class="main_menu">
-<!--								{% categories %}-->
-							<li>
+						<ul class="main_menu" style="font-size: 50%">
+								{% categories %}
+							{% comment %} <li>
 								<a href="{% url 'shop' %}">ALL</a>
 							</li>
 							<li>
@@ -157,7 +161,7 @@
 									<li><a href= "#">PSU</a></li>
 									<li><a href= "#">Cooling</a></li>
 								</ul>
-							</li>
+							</li> {% endcomment %}
 						</ul>
 				</div>
 
@@ -274,7 +278,7 @@
 				<ul class="main-menu">
 					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
 						<span class="topbar-child1">
-							Free shipping for standard order over $100
+							Thành viên: <strong>Bùi Thế Huy, Đức Anh, Cao Tuấn Anh</strong> | MÃ SV: <strong>22022667,22022 ,22022 ,</strong> |  <strong>Trường Đại học Công Nghệ - Đại học quốc gia Hà Nội </strong>
 						</span>
 					</li>
 
@@ -335,4 +339,7 @@
 			</nav>
 		</div>
 
+
+		<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+		<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </header>

@@ -2366,6 +2366,16 @@
 	border-radius: 50%;
 	overflow: hidden;
 }
+.wrap-pic-cir-km {
+	border-radius: 20px;
+	overflow: hidden;
+}
+.wrap-pic-cir-5px {
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+
 .wrap-pic-cir img {
 	width: 100%;
 }
@@ -3373,6 +3383,14 @@ TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 	letter-spacing: 2px;
 }
 
+.m-text28 {
+	font-family: Montserrat-Regular;
+	font-size: 13px;
+	color: yellow;
+	line-height: 1.8;
+	background-color: red;
+}
+
 /*[ L-Text 31 - 50 ]
 ///////////////////////////////////////////////////////////
 */
@@ -3716,11 +3734,20 @@ SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE
 .bg6 {background-color: #f0f0f0;}
 .bg7 {background-color: #333333;}
 .bg8 {background-color: #e6e6e6;}
+.bg9 {backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.5);}
 
 .bg-img1 {
 	background-repeat: no-repeat;
 	background-position: center 0;
 	background-size: cover;
+}
+
+.bg-km {
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-size: cover;
+    background-image: url('../images/bg-km.jpg');
 }
 
 
