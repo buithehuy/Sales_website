@@ -1,0 +1,77 @@
+[
+    {
+        "name": "Bo Mạch Chủ (Mainboard) Gigabyte GA B75M-D3H (CTY Box-3 Năm)",
+        "price": "1650000",
+        "specs": {
+            "Gigabyte GA B75M-D3H": "Gigabyte GA B75M-D3H",
+            "Socket": "LGA1155",
+            "Chipset": "Intel B75 Express",
+            "Bộ nhớ": "4 x DDR3 DIMM Slots",
+            "Dual chanl DDR3": "1066/1333/1600/2200 MHz, up to 32GB",
+            "Đồ họa": "1 x D-Sub port, 1 x DVI-D port (1920 x 1200@60Hz), 1 x HDMI port (1920 x 1200)",
+            "Network Speed": "10/100/1000 Mbit",
+            "Khe cắm mở rộng": "1 x PCIe x 16 slots, running at x 16 (PCIE x 16), 1 x PCIe x 16 slots, running at x 4 (PCIE x 4), 2 x PCI slots",
+            "Realtek ALC887 codec": "High Definition Audio"
+        }
+    },
+    {
+        "name": "Bo Mạch Chủ (Mainboard) Gigabyte GA-G31M DDR2 (CTY Box-3 Năm)",
+        "price": "800000",
+        "specs": {
+            "Gigabyte G31M/ Ram DDr2": "Gigabyte G31M/ Ram DDr2",
+            "Socket": "Intel Socket 775",
+            "Chipset": "Intel G31",
+            "CPU Support (Loại CPU hỗ trợ)": "Intel Pentium D, Intel Celeron, Intel Celeron Dual-Core, Intel Core 2 Duo, Intel Core 2 Quad, Intel Core 2 Extreme, Intel Pentium 4, Intel Pentium Extreme, Intel Pentium Dual Core",
+            "Front Side Bus (FSB)": "1333Mhz",
+            "Memory Slot (Số khe cắm ram)": "2",
+            "Memory Type (Loại Ram sử dụng)": "DDR2",
+            "Max Memory Support (Gb)": "4"
+        }
+    },
+    {
+        "name": "Bo Mạch Chủ (Mainboard) INTEL G41DDR3 (CTY Box-3 Năm)",
+        "price": "990000",
+        "specs": {
+            "Manufacture (Hãng sản xuất)": "INTEL",
+            "Socket": "Intel Socket 775",
+            "Form Factor": "MicroATX (uATX)",
+            "Chipset": "Intel G41 / ICH7",
+            "CPU Support (Loại CPU hỗ trợ) (1)": "Intel Core 2 Duo, Intel Core 2 Quad, Intel Core 2 Extreme, Intel Pentium Dual Core",
+            "Front Side Bus (FSB)": "800MHz (1600 MT/s), 1066Mhz, 1333Mhz",
+            "Memory Slot (Số khe cắm ram)": "2",
+            "Max Memory Support (Gb)": "8",
+            "Memory Type (Loại Ram sử dụng)": "DDR3"
+        }
+    },
+    {
+        "name": "Bo Mạch Chủ Main ASUS PRIME H510M-K DDR4 Socket 1200 - Hàng Chính Hãng",
+        "price": "1790000",
+        "specs": {
+            "Sản phẩm": "Bo mạch chủ",
+            "Tên Hãng": "ASUS",
+            "Model": "PRIME H510M-K",
+            "CPU hỗ trợ": "Hỗ trợ cho thế hệ thứ 10&11 Intel Core Socket LGA1200",
+            "Chipset": "H510",
+            "RAM hỗ trợ": "2 x DDR4 DIMM Slots ( tối đa 64GB ) Supports DDR4 3200(OC)/2933/2800/2666 / 2400 / 2133 non-ECC, un-buffered memory",
+            "Khe cắm mở rộng": "1 x PCI Express 4.0/3.0 x16 Slot, 1 x PCI Express 3.0 x1 Slot",
+            "Ổ cứng hỗ trợ": "4 x SATA3 6.0 Gb/s Connectors",
+            "Cổng kết nối (Internal)": "1 x 4-pin CPU Fan header, 1 x 4-pin Chassis Fan header, 1 x 24-pin Main Power connector, 1 x 8-pin +12V Power connector, 1 x M.2 slot (Key M), 4 x SATA 6Gb/s ports, 1 x USB 3.2 Gen 1 header supports additional 2 USB 3.2 Gen 1 ports, 1 x USB 2.0 header supports additional 2 USB 2.0 ports, 1 x RGB header, 1 x Clear CMOS header, 1 x COM Port header, 1 x Front Panel Audio header (AAFP), 1 x S/PDIF Out header, 1 x Speaker header, 1 x SPI TPM header (14-1pin), 1 x 10-1 pin System Panel header"
+        }
+    },
+    {
+        "name": "Bo Mạch Chủ (Mainboard) Asus P5G41TM LX DDr3 (CTY Box-3 Năm)",
+        "price": "900000",
+        "specs": {
+            "Manufacture (Hãng sản xuất)": "ASUS",
+            "Model": "ASUS P5G41T-M LX",
+            "Socket": "Intel Socket 775",
+            "Chipset": "Intel G41",
+            "CPU Support": "Intel Celeron, Intel Celeron Dual-Core, Intel Core 2 Duo, Intel Core 2 Quad",
+            "Memory Type (Loại Ram sử dụng)": "DDR3",
+            "Front Side Bus (FSB)": "800MHz (1600 MT/s), 1066Mhz, 1333Mhz",
+            "Memory Slot (Số khe cắm ram)": "2",
+            "Max Memory Support (Gb)": "8",
+            "Form Factor": "MicroATX (uATX)"
+        }
+    }
+]

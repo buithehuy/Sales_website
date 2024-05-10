@@ -27,25 +27,25 @@
     {% endfor %}
     <div class="cover">
  <div class="form-container">
-      <p class="title">Login your account</p>
+      <p class="title"> Đăng nhập</p>
 <!--     form-->
       <form class="form" method="post">
             {% csrf_token %}
 
 <!--          username-->
-                <input type="text" class="input" id="username" name="username" placeholder="Enter Your Username" required>
+                <input type="text" class="input" id="username" name="username" placeholder="Tên đăng nhập" required>
 <!--          passwword-->
-                <input type="password" class="input" id="pass1" name="password" placeholder="Enter Your Password" required>
+                <input type="password" class="input" id="pass1" name="password" placeholder="Mật khẩu" required>
 <!--          submit-->
         <p class="page-link">
-            <a href="forget_password/"> <span class="page-link-label">Forgot Password?</span></a>
+            <a href="forget_password/"> <span class="page-link-label">Quên mật khẩu </span></a>
         </p>
-        <button type="submit" class="form-btn">Log in</button>
+        <button type="submit" class="form-btn"> Đăng nhập</button>
           <p style="color: red"> {{msg}}</p>
 
       </form>
       <p class="sign-up-label">
-        Don't have an account?<a href="{% url 'register' %} " style="text-decoration:none" ><span class="sign-up-link">Sign up</span><a>
+        Bạn chưa có tài khoản?<a href="{% url 'register' %} " style="text-decoration:none" ><span class="sign-up-link"> Tạo tài khoản</span><a>
       </p>
 
 <!--     gg login-->
@@ -62,7 +62,7 @@
             <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571
 	c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
           </svg>
-          <span>Log in with Google</span>
+          <span> Đăng nhập bằng Google</span>
         </div>
       </div>
     </div>

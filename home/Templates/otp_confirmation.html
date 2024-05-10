@@ -121,15 +121,15 @@
 <div class="cover">
 <div class="form-container">
       <div class="logo-container">
-        OTP Confirmation
+        Xác minh OTP
       </div>
       <form class="form" method="post">
            {% csrf_token %}
         <div class="form-group">
-          <label for="otp"> We have sent the verification <br>code to your email. </label>
+          <label for="otp"> Chúng tôi đã gửi mã  <br>OTP tới gmail của bạn </label>
             <input type="text" id="otp" name="otp" placeholder="Enter OTP" required>
         </div>
-        <button class="form-submit-btn" type="submit">OK</button>
+        <button class="form-submit-btn" type="submit">Xác nhận</button>
       </form>
               <p style="color: red"> {{msg}}</p>
 

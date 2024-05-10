@@ -5,23 +5,22 @@ from django_countries.widgets import CountrySelectWidget
 from home.models import Profile
 
 PAYMENT_CHOICES = (
-    ('S', 'Stripe'),
-    ('P', 'PayPal')
+    ('S', 'Thanh toán khi nhận hàng'),
+    ('P', 'Chuyển khoản')
 )
 
 
 class CheckoutForm(forms.Form):
     street_address = forms.CharField(widget=forms.TextInput(attrs={
-        'placeholder': '1234 Main St',
+        'placeholder': 'Số nhà ,...',
         'class': 'form-control'
     }))
     apartment_address = forms.CharField(required=False, widget=forms.TextInput(attrs={
-        'placeholder': 'Apartment or suite',
+        'placeholder': 'Tự chọn (cơ quan trường học,...)',
         'class': 'form-control'
     }))
-    country = CountryField(blank_label='(select country)').formfield(widget=CountrySelectWidget(attrs={
-        'class': 'custom-select d-block w-100'
-
+    city = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control'
     }))
     zip = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control'

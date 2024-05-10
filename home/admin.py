@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Item, OrderItem, Order, Payment, Coupon, Refund, BillingAddress, Category, Slide,InfoUser
+from .models import Item, OrderItem, Order, Payment, Coupon, Refund, BillingAddress, Category, Slide,InfoUser,RecentlyViewedItems
 
 
 # Register your models here.
@@ -84,6 +84,12 @@ class InfoUserAdmin(admin.ModelAdmin):
         'address',
         'phone'
     ]
+# class RecentlyViewedItemsAdmin(admin.ModelAdmin):
+#     list_display = [
+#         'date',
+#         'user',
+#         'Item'
+#     ]
 class CategoryAdmin(admin.ModelAdmin):
     list_display = [
         'title',
@@ -104,3 +110,4 @@ admin.site.register(Coupon)
 admin.site.register(Refund)
 admin.site.register(BillingAddress, AddressAdmin)
 admin.site.register(InfoUser, InfoUserAdmin)
+

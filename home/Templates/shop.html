@@ -23,10 +23,10 @@
 	<!-- Title Page -->
 	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/static/images/heading-pages-02.jpg)	;">
 		<h2 class="l-text2 t-center">
-			Shop
+			Cửa hàng
 		</h2>
 		<p class="m-text13 t-center">
-			All categories
+			Toàn bộ sảm phẩm
 		</p>
 	</section>
 
@@ -40,13 +40,13 @@
 					<div class="leftbar p-r-20 p-r-0-sm">
 						<!--  -->
 						<h4 class="m-text14 p-b-7">
-							Categories
+							Danh mục sảm phẩm
 						</h4>
 
 						<ul class="p-b-54">
 							<li class="p-t-4">
 								<a href="/shop" class="s-text13 active1">
-									All
+									Tất cả
 								</a>
 							</li>
 
@@ -68,29 +68,28 @@
 <!--						sort-->
 							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10" >
 								<select class="selection-2" name="sorting">
-									<option>Default Sorting</option>
-									<option>Popularity</option>
-									<option>Price: low to high</option>
-									<option>Price: high to low</option>
+									<option>Mặc định</option>
+									<option>Giá: Thấp tới cao</option>
+									<option>Giá: Cao tới thấp </option>
 								</select>
 							</div>
 
 							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-								<select class="selection-2" name="sorting">
-									<option>Price</option>
-									<option>$0.00 - $50.00</option>
-									<option>$50.00 - $100.00</option>
-									<option>$100.00 - $150.00</option>
-									<option>$150.00 - $200.00</option>
-									<option>$200.00+</option>
+<!--								<select class="selection-2" name="sorting">-->
+<!--									<option>Price</option>-->
+<!--									<option>$0.00 - $50.00</option>-->
+<!--									<option>$50.00 - $100.00</option>-->
+<!--									<option>$100.00 - $150.00</option>-->
+<!--									<option>$150.00 - $200.00</option>-->
+<!--									<option>$200.00+</option>-->
 
-								</select>
+<!--								</select>-->
 							</div>
 						</div>
 
-						<span class="s-text8 p-t-5 p-b-5">
-							Showing 1–12 of 16 results
-						</span>
+<!--						<span class="s-text8 p-t-5 p-b-5">-->
+<!--							Showing 1–12 of 16 results-->
+<!--						</span>-->
 					</div>
 
 					<!-- Product -->
@@ -113,7 +112,7 @@
 										<div class="block2-btn-addcart w-size1 trans-0-4">
 											
 											<a href="{% url 'add-to-cart' item.slug %}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-												Add to Cart
+												Thêm vào giỏ
 											</a>
 
 										 </div>
@@ -127,10 +126,10 @@
 									</a>
 
 									<span class="block2-price m-text7 p-r-5">
-										${{item.price}}
+										{{item.price}} VNĐ
 									</span>
 									<span class="block2-price m-text8 p-r-5">
-										${{item.discount_price}}
+										{{item.discount_price}} VNĐ
 									</span>
 								</div>
 							</div>
@@ -151,7 +150,7 @@
 					{% if page_obj.has_previous %}
 					<a class="page-link" href="?page={{ page_obj.previous_page_number}}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
-						<span class="sr-only">Previous</span>
+						<span class="sr-only">Quay lại</span>
 					</a>
 					{% endif %}
 					<a href="?page={{ page_obj.number }}" class="item-pagination flex-c-m trans-0-4 active-pagination">{{page_obj.number}}</a>
@@ -160,7 +159,7 @@
 					{% if page_obj.has_next %}
 					<a class="page-link" href="?page={{ page_obj.next_page_number}}" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
-							<span class="sr-only">Next</span>
+							<span class="sr-only">Tiếp</span>
 						</a>
 						{% endif %}
 				</div>

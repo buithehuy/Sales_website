@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from Sales_website import settings
 from django.utils import timezone
-
+import json
 from django.db.models import F, FloatField, ExpressionWrapper
 
 from django.contrib.auth.models import User
@@ -19,12 +19,12 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
 from . tokens import generate_token
 import mysql.connector
+import datetime
 from  .models import *
 from .forms import CheckoutForm, CouponForm, RefundForm
-
+from unidecode import unidecode
 import random
 import string
-
 
 mydb = mysql.connector.connect(
     host='localhost',
@@ -32,6 +32,63 @@ mydb = mysql.connector.connect(
     password='',
     database = 'sales_website'
 )
+def decode_spec(dic):
+    text = ''
+    for key in dic.keys():
+        text += key + ' ' + dic[key]
+    return text
+def decode_product(dic):
+    if 'name' in dic:
+        name = dic['name']
+        price = dic['price']
+        specs = decode_spec(dic['specs'])
+        return [name,price,specs]
+    else:
+        return dic
+
+with open('home/data/products/Gaming Gear/chuột/info.json','r+',encoding='UTF-8') as inp:
+    data = inp.read()
+    specs = json.loads(data,object_hook=decode_product)
+#
+# Category.objects.create(
+#     title= 'Mouse',
+#     description = 'Chuột PC',
+#     slug = 'mouse',
+#     image = 'media_root/add.webp'
+# )
+# Category.objects.create(
+#     title= 'Mainboard',
+#     description = 'Bo mạch chủ',
+#     slug= 'mainboard',
+#     image = 'media_root/add.webp'
+
+def get_slug(str):
+    str = str.lower()
+    str = unidecode(str)
+    str = str.replace(' ', '-')
+    str = str.replace('(', '')
+    str = str.replace(')', '')
+    str = str.replace('/', '')
+    return str
+# #
+# for i in specs:
+#     Item.objects.create(
+#         title= i[0],
+#         price = int(i[1]) + 10000,
+#         discount_price= int(i[1]),
+#         label = 'N',
+#         stock_no = 'yes',
+#         description_short = "Chuột dành cho PC",
+#         description_long = i[2],
+#         image = f'{i[0]}.jpg',
+#         image2 = f'no',
+#         image3 = f'no',
+#         is_active = True,
+#         category = Category.objects.get(title='Mouse'),
+#         slug = get_slug(i[0])
+#     )
+
+
 # Create your views here.
 def get_home(request) :
 
@@ -224,36 +281,11 @@ def get_shop(request):
     return render(request, "shop.html",context)
 def get_product(request,slug):
     product = Item.objects.get(slug=slug)
-    order = Order.objects.get(user=request.user, ordered=False)
+    order = Order.objects.get_or_create(user=request.user, ordered=False)
+    rececentViewed = RecentlyViewedItems.objects.create(user=request.user,item=product,date = datetime.datetime.now())
     template_name = "product-detail.html"
     return render(request,template_name,{'object':product,'order':order})
 
-def add_to_cart(request, slug):
-    item = Item.objects.get(slug=slug)
-    order_item, created = OrderItem.objects.get_or_create(
-        item=item,
-        user=request.user,
-        ordered=False
-    )
-    order_qs = Order.objects.filter(user=request.user, ordered=False)
-    if order_qs.exists():
-        order = order_qs[0]
-        if order.items.filter(item__slug=item.slug).exists():
-            order_item.quantity += 1
-            order_item.save()
-            messages.info(request, "Item qty was updated.")
-            return redirect("order-summary")
-        else:
-            order.items.add(order_item)
-            messages.info(request, "Item was added to your cart.")
-            return redirect("order-summary")
-    else:
-        ordered_date = timezone.now()
-        order = Order.objects.create(
-            user=request.user, ordered_date=ordered_date)
-        order.items.add(order_item)
-        messages.info(request, "Item was added to your cart.")
-    return redirect("order-summary")
 def add_to_cart(request, slug):
     item = Item.objects.get(slug=slug)
     order_item, created = OrderItem.objects.get_or_create(
@@ -349,7 +381,7 @@ def remove_from_cart(request, slug):
         # add a message saying the user dosent have an order
         messages.info(request, "u don't have an active order.")
         return redirect("product", slug=slug)
-    return redirect("product", slug=slug)
+
 
 def remove_single_item_from_cart(request, slug):
     item = Item.objects.get(slug=slug)
@@ -380,7 +412,7 @@ def remove_single_item_from_cart(request, slug):
         # add a message saying the user dosent have an order
         messages.info(request, "u don't have an active order.")
         return redirect("product", slug=slug)
-    return redirect("product", slug=slug)
+
 
 def get_coupon(request, code):
     try:
@@ -451,7 +483,8 @@ def post_refund(request):
 
 def profile(request):
     user_info = InfoUser.objects.get(user = request.user)
-    return render(request, 'profile.html',{'User_info': user_info})
+    view_list = RecentlyViewedItems.objects.filter(user=request.user).order_by('-date')[:3]
+    return render(request, 'profile.html',{'User_info': user_info,'view_list':view_list})
 
 def profile_edit(request):
     user_info = InfoUser.objects.get(user = request.user)
