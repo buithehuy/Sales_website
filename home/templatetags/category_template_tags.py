@@ -86,7 +86,7 @@ def render_item_block(item, show_discount=False):
 			</div>
         """
 # <span class="block2-discount-percentage m-text28" ">-{discount_percentage}%</span>
-
+   
 
     html = f"""
         <div class="col-sm-12 col-md-6 col-lg-4 p-b-50 ">
@@ -101,9 +101,11 @@ def render_item_block(item, show_discount=False):
                                 <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
                             </a>
                             <div class="block2-btn-addcart w-size1 trans-0-4">
+                  
                                 <a href="{reverse("add-to-cart", kwargs={'slug': item.slug})}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                     Thêm vào giỏ
                                 </a>
+							
                             </div>
                         </div>
                     </div>

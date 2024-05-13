@@ -26,6 +26,14 @@ from unidecode import unidecode
 import random
 import string
 
+# chay tren docker 
+# mydb = mysql.connector.connect(
+#     host='db',
+#     user='your_username',
+#     password='your_password',
+#     database = 'sales_website'
+# )
+################ chạy trên local
 mydb = mysql.connector.connect(
     host='localhost',
     user='root',
@@ -46,10 +54,13 @@ def decode_product(dic):
     else:
         return dic
 
-with open('home/data/products/Gaming Gear/chuột/info.json','r+',encoding='UTF-8') as inp:
+# with open('home/data/products/Gaming Gear/chuột/info.json','r+',encoding='UTF-8') as inp:
+#     data = inp.read()
+#     specs = json.loads(data,object_hook=decode_product)
+#
+with open('home/data/products/Linh kiện máy tính/mainboard/info.json','r+',encoding='UTF-8') as inp:
     data = inp.read()
     specs = json.loads(data,object_hook=decode_product)
-#
 # Category.objects.create(
 #     title= 'Mouse',
 #     description = 'Chuột PC',
@@ -71,6 +82,8 @@ def get_slug(str):
     str = str.replace('/', '')
     return str
 # #
+# count = 1
+
 # for i in specs:
 #     Item.objects.create(
 #         title= i[0],
@@ -78,15 +91,16 @@ def get_slug(str):
 #         discount_price= int(i[1]),
 #         label = 'N',
 #         stock_no = 'yes',
-#         description_short = "Chuột dành cho PC",
+#         description_short = "Bo mạch chủ",
 #         description_long = i[2],
-#         image = f'{i[0]}.jpg',
+#         image = f'{i[0]}.webp',
 #         image2 = f'no',
 #         image3 = f'no',
 #         is_active = True,
-#         category = Category.objects.get(title='Mouse'),
-#         slug = get_slug(i[0])
+#         category = Category.objects.get(title='Mainboard'),
+#         slug = get_slug(i[0][:10]) + f'-{count}'
 #     )
+#     count += 1
 
 
 # Create your views here.
@@ -283,45 +297,58 @@ def get_product(request,slug):
         rececentViewed = RecentlyViewedItems.objects.create(user=request.user,item=product,date = datetime.datetime.now())
         return render(request,template_name,{'object':product,'order':order})
     
-    return render(request,template_name)
+    return render(request,template_name,{'object':product})
 
 def add_to_cart(request, slug):
-    item = Item.objects.get(slug=slug)
-    order_item, created = OrderItem.objects.get_or_create(
-        item=item,
-        user=request.user,
-        ordered=False
-    )
-    order_qs = Order.objects.filter(user=request.user, ordered=False)
-    if order_qs.exists():
-        order = order_qs[0]
-        if order.items.filter(item__slug=item.slug).exists():
-            order_item.quantity += 1
-            order_item.save()
-            messages.info(request, "Item qty was updated.")
-            return redirect("order-summary")
+    if request.user.is_authenticated :
+        item = Item.objects.get(slug=slug)
+        order_item, created = OrderItem.objects.get_or_create(
+            item=item,
+            user=request.user,
+            ordered=False
+        )
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if order_qs.exists():
+            order = order_qs[0]
+            if order.items.filter(item__slug=item.slug).exists():
+                order_item.quantity += 1
+                order_item.save()
+                messages.info(request, "Item qty was updated.")
+                return redirect("order-summary")
+            else:
+                order.items.add(order_item)
+                messages.info(request, "Thêm thành công sảm phẩm vào giỏ hàng.")
+                return redirect("order-summary")
         else:
+            ordered_date = timezone.now()
+            order = Order.objects.create(
+                user=request.user, ordered_date=ordered_date)
             order.items.add(order_item)
-            messages.info(request, "Item was added to your cart.")
-            return redirect("order-summary")
+            messages.info(request, "Thêm thành công sảm phẩm vào giỏ hàng.")
+        return redirect("order-summary")
     else:
-        ordered_date = timezone.now()
-        order = Order.objects.create(
-            user=request.user, ordered_date=ordered_date)
-        order.items.add(order_item)
-        messages.info(request, "Item was added to your cart.")
-    return redirect("order-summary")
+        messages.success(request, "Vui lòng đăng nhập để thêm vào giỏi hàng!")
+        return redirect('login')
 
 
 def get_category(request, slug=None):
     sorting = request.GET.get('sorting')
-
+    search = request.GET.get('search-product')
+    if search == None:
+        search = ''
     if slug:
         category = Category.objects.get(slug=slug)
-        items = Item.objects.filter(category=category, is_active=True)
+        items = Item.objects.filter(category=category, is_active=True) 
+        if search != '':
+            items = Item.objects.filter(title__icontains=search, is_active=True)
+            # return redirect(f'category/?search-product={search}')
+
     else:
         items = Item.objects.all()
-
+        if search != '':
+            items = Item.objects.filter(title__icontains=search, is_active=True)
+            # return redirect(f'category/?search-product={search}')
+            
     if sorting == 'deepest_discount':
         items = items.filter(discount_price__isnull=False).annotate(
             discount_ratio=ExpressionWrapper(F('discount_price') / F('price'), output_field=FloatField())
@@ -330,14 +357,21 @@ def get_category(request, slug=None):
         items = items.order_by('price')
     elif sorting == 'price_desc':
         items = items.order_by('-price')
-
     context = {
-        'object_list': items,
-        'category_title': category.title if slug else None,
-        'category_description': category.description if slug else None,
-        'category_image': category.image if slug else None
-    }
-
+            'object_list': items,
+            'category_title': category.title if slug else None,
+            'category_description': category.description if slug else None,
+            'category_image': category.image if slug else None,
+            'search_pro':search
+        }
+    if search != '':
+         context = {
+            'object_list': items,
+            'category_title': 'Tìm kiếm sảm phẩm',
+            'category_description':  None,
+            'category_image':  None,
+            'search_pro': search
+        }
     return render(request, "category.html", context)
 
 
