@@ -55,15 +55,15 @@
 				
 				{% if object.discount_price %}
 								<span class="block2-oldprice m-text7 p-r-5" style="font-size: 1.5rem;">
-									${{ object.price }}
+									{{ object.price }} ₫
 								</span>
 
 								<span class="block2-newprice m-text8 p-r-5" style="font-size: 1.5rem;">
-									${{ object.discount_price }}
+									{{ object.discount_price }} ₫
 								</span>
 								{% else %}
 								<span class="m-text17">
-									${{object.price}}
+									{{object.price}} ₫
 								</span>
 								{% endif %}
 
@@ -126,10 +126,12 @@
 								
 							</div>
 <!--				href="{object.get_remove_from_cart_url}"			href="{ object.get_add_to_cart_url }"-->
+							{% if request.user.is_authenticated %}
 							<a href="{% url 'add-to-cart' object.slug %}" class="btn btn-primary" style="margin: 2px;">Thêm vào giỏ hàng</a>
 							{% for order_item in order.items.all %}
 							<a  href="{% url 'remove-from-cart' order_item.item.slug %}" class="btn btn-outline-dark" style="margin: 2px;"> Xóa khỏi giỏ hàng </a>
 							   {% endfor %}
+							   {% endif %} 
 						</div>
 					</div>
 				</div>

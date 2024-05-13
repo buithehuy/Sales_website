@@ -3,8 +3,8 @@
 {% load category_template_tags %}
 {% block content %}
 <style type="text/css">
-	.selection-2{
-	display: block;
+    .selection-2{
+    display: block;
     width: 100%;
     height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
@@ -17,153 +17,142 @@
     border: 1px solid #ced4da !important;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-	}
+    }
 </style>
 
-	<!-- Title Page -->
-	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/media/{{ category_image }});">
-		<h2 class="l-text2 t-center"style="text-shadow: 0 0 1px black; ">
-			{{ category_title }}
-		</h2>
-		<p class="m-text13 t-center"style="text-shadow: 0 0 2px black; ">
-			{{ category_description }}
-		</p>
-	</section>
+    <!-- Title Page -->
+    <section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url({% if category_image %}/media/{{ category_image }}{% else %}/static/images/heading-pages-02.jpg{% endif %});">
+        <h2 class="l-text2 t-center" style="text-shadow: 0 0 1px black;">
+            {% if category_title %}{{ category_title }}{% else %}Cửa hàng{% endif %}
+        </h2>
+        <p class="m-text13 t-center" style="text-shadow: 0 0 2px black;">
+            {% if category_description %}{{ category_description }}{% else %}Toàn bộ sản phẩm{% endif %}
+        </p>
+    </section>
 
 
-	<!-- Content page -->
-	<section class="bgwhite p-t-55 p-b-65">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-					<div class="leftbar p-r-20 p-r-0-sm">
-						<!--  -->
-						<h4 class="m-text14 p-b-7">
-							Danh mục sản phẩm
-						</h4>
+    <!-- Content page -->
+    <section class="bgwhite p-t-55 p-b-65">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                    <div class="leftbar p-r-20 p-r-0-sm">
+                        <!--  -->
+                        <h4 class="m-text14 p-b-7">
+                            Danh mục sản phẩm
+                        </h4>
 
-						<ul class="p-b-54">
-							<li class="p-t-4">
-								<a href="/shop" class="s-text13 active1">
-									Tất cả
-								</a>
-							</li>
+                        <ul class="p-b-54">
+                            <li class="p-t-4">
+                                <a href="/category" class="s-text13 active1">
+                                    Tất cả
+                                </a>
+                            </li>
 
-							{% categories_li_a %}
+                            {% categories_li_a %}
 
-						</ul>
+                        </ul>
+                    </div>
+                </div>
 
-		
+                <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+                    <!-- Sort and filter -->
+                    <div class="flex-sb-m flex-w p-b-35">
+                        <div class="flex-w">
+                            <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                                <form id="sorting-form" method="GET">
+                                    <select class="selection-2" name="sorting" onchange="document.getElementById('sorting-form').submit()">
+                                        <option value="">Sắp xếp mặc định</option>
+                                        <option value="deepest_discount">Khuyến mãi hấp dẫn nhất</option>
+                                        <option value="price_asc">Giá: tăng dần</option>
+                                        <option value="price_desc">Giá: giảm dần</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                        <span class="s-text8 p-t-5 p-b-5">
+                            Showing {{ object_list|length }} of {{ object_list.paginator.count }} results
+                        </span>
+                    </div>
 
-						
-					</div>
-				</div>
+                    <!-- Product -->
+                    <div class="row">
+                        {% for item in object_list %}
+                        <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <a href="{{ item.get_absolute_url }}">
+                                    <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                        <img src="/media/{{ item.image }}" alt="IMG-PRODUCT" style="height: 360px;">
+                                        <div class="block2-overlay trans-0-4">
+                                            <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                            </a>
+                                            <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                <a href="{% url 'add-to-cart' item.slug %}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                    Thêm vào giỏ
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
 
-				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-					<!-- Sort and filter -->
-					<div class="flex-sb-m flex-w p-b-35">
-						<div class="flex-w">
-							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-								<form id="sorting-form" method="GET">
-									<select class="selection-2" name="sorting" onchange="document.getElementById('sorting-form').submit()">
-										<option value="">Sắp xếp mặc định</option>
-										<option value="deepest_discount">Khuyến mãi hấp dẫn nhất</option>
-										<option value="price_asc">Giá: tăng dần</option>
-										<option value="price_desc">Giá: giảm dần</option>
-									</select>
-								</form>
-							</div>
-						</div>
-						<span class="s-text8 p-t-5 p-b-5">
-							Showing {{ object_list|length }} of {{ object_list.paginator.count }} results
-						</span>
-					</div>
-				
-					<!-- Product -->
-					<div class="row">
-						{% for item in object_list %}
-						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-							<!-- Block2 -->
-							<div class="block2">
-								<a href="{{ item.get_absolute_url }}">
-									<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-										<img src="/media/{{ item.image }}" alt="IMG-PRODUCT" style="height: 360px;">
-										<div class="block2-overlay trans-0-4">
-											<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-												<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-												<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-											</a>
-											<div class="block2-btn-addcart w-size1 trans-0-4">
-												<a href="{% url 'add-to-cart' item.slug %}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-													Thêm vào giỏ
-												</a>
-											</div>
-										</div>
-									</div>
-								</a>
-				
-								<div class="block2-txt p-t-20">
-									<a href="/shop/product/{{ item.slug }}" class="block2-name dis-block s-text3 p-b-5">
-										{{ item.title }}
-									</a>
-									<div class="block2-price-wrapper" style="display: flex; align-items: center;">
-										<div style="flex: 1;">
-											<span class="block2-price m-text7 p-r-5">
-												{{ item.price }} VNĐ
-											</span>
-											{% if item.discount_price %}
-											<span class="block2-price m-text8 p-r-5">
-												{{ item.discount_price }} VNĐ
-											</span>
-											{% endif %}
-										</div>
-										{% if item.discount_price %}
-										<div style="text-align: right;">
-											<span class="block2-price m-text28">
-												-{{ item.discount_price|calculate_discount_percentage:item.price }}%
-											</span>
-										</div>
-										{% endif %}
-									</div>
-								</div>
-							</div>
-						</div>
-						{% endfor %}
-					</div>
-				</div>
-				
+                                <div class="block2-txt p-t-20" style ="height: 95px">
+                                    <a href="/category/product/{{ item.slug }}" class="block2-name dis-block s-text3 p-b-5" style = "height: 50px">
+                                        {{ item.title }}
+                                    </a>
+                                    <div class="block2-price-wrapper" style="display: flex; align-items: center;">
+                                        <div style="flex: 1;">
+                                            {% if item.discount_price %}
+                                            <span class="block2-price m-text7 p-r-5">
+                                            {% else %}
+                                            <span class="block2-price m-text6 p-r-5">
+                                            {% endif %}
+                                            {{ item.price }} ₫
+                                            </span>
+                                            {% if item.discount_price %}
+                                            <span class="block2-price m-text8 p-r-5">
+                                                {{ item.discount_price }} ₫
+                                            </span>
+                                            {% endif %}
+                                        </div>
+                                        {% if item.discount_price %}
+                                        <div style="text-align: right;">
+                                            <span class="block2-price m-text28 p-r-5 p-l-5">
+                                                -{{ item.discount_price|calculate_discount_percentage:item.price }}%
+                                            </span>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-						
+    <!-- Pagination -->
+    {% if is_paginated %}
+    <div class="pagination flex-m flex-w p-t-26">
+        {% if page_obj.has_previous %}
+        <a class="page-link" href="?page={{ page_obj.previous_page_number}}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Quay lại</span>
+        </a>
+        {% endif %}
+        <a href="?page={{ page_obj.number }}" class="item-pagination flex-c-m trans-0-4 active-pagination">{{page_obj.number}}</a>
 
-						
-				
-				</div>
-				<!-- ---- row end ------- -->
+        {% if page_obj.has_next %}
+        <a class="page-link" href="?page={{ page_obj.next_page_number}}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Tiếp</span>
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
 
-				<br>
-				<!-- Pagination -->
-				{% if is_paginated %}
-				<div class="pagination flex-m flex-w p-t-26">
-					{% if page_obj.has_previous %}
-					<a class="page-link" href="?page={{ page_obj.previous_page_number}}" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-						<span class="sr-only">Previous</span>
-					</a>
-					{% endif %}
-					<a href="?page={{ page_obj.number }}" class="item-pagination flex-c-m trans-0-4 active-pagination">{{page_obj.number}}</a>
-					
-					
-					{% if page_obj.has_next %}
-					<a class="page-link" href="?page={{ page_obj.next_page_number}}" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-							<span class="sr-only">Next</span>
-						</a>
-						{% endif %}
-				</div>
-				{% endif %}
-			</div>
-		</div>
-	</section>
-
-
-		{% endblock content %}
+{% endblock content %}

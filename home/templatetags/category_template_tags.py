@@ -54,7 +54,7 @@ def categories_div():
         #     items_div += """<div class="block1 hov-img-zoom pos-relative m-b-30"><img src="/media/{}" alt="IMG-BENNER"><div class="block1-wrapbtn w-size2"><a href="/category/{}" class="flex-c-m size2 m-text2 bg9 hov1 trans-0-4">{}</a></div></div>""".format(
         #         j.image, j.slug, j.title)
         # else:
-            items_div_ = """<div class="block1 hov-img-zoom pos-relative m-b-30" style="height:145px;width: 391px; "><img src="/media/{}" alt="IMG-BENNER"><div class="block1-wrapbtn w-size2"><a href="/category/{}" class="flex-c-m size2 m-text2 bg9 hov1 trans-0-4">{}</a></div></div>""".format(
+            items_div_ = """<div class="block1 hov-img-zoom pos-relative m-b-30" style="height:145px;width: 391px; "><img src="/media/{}" alt="IMG-BENNER"><div class="block1-wrapbtn w-size2"><a href="/category/{}" class="flex-c-m size2 m-text2 hov1 trans-0-4">{}</a></div></div>""".format(
                 j.image, j.slug, j.title)
             item_div_list += """<div class=" m-r-0 m-l-0">""" + items_div + items_div_ + """</div>"""
             items_div = ""
@@ -69,16 +69,29 @@ def render_item_block(item, show_discount=False):
     """
     discount_html = ""
     if show_discount and item.discount_price:
+        discount_percentage = round(((item.price - item.discount_price) / item.price) * 100, 2)
         discount_html = f"""
-            <span class="block2-oldprice m-text7 p-r-5">${item.price}</span>
-            <span class="block2-newprice m-text8 p-r-5">${item.discount_price}</span>
-         
+            <div class="block2-price-wrapper" style="display: flex; align-items: center;">
+				<div style="flex: 1;">
+					<span class="block2-price m-text7 p-r-5">
+						{ item.price } ₫
+					</span>
+					<span class="block2-price m-text8 p-r-5">
+						{ item.discount_price } ₫
+					</span>
+				</div>
+					<div style="text-align: right; ">
+					    <span class="block2-discount-percentage m-text28 p-r-5 p-l-5" >-{discount_percentage}%</span>						
+					</div>
+			</div>
         """
+# <span class="block2-discount-percentage m-text28" ">-{discount_percentage}%</span>
+
 
     html = f"""
         <div class="col-sm-12 col-md-6 col-lg-4 p-b-50 ">
             <!-- Block2 -->
-            <div class="block2 bgwhite wrap-pic-cir-5px">
+            <div class="block2 bgwhite wrap-pic-cir-km >
                 <a href="{reverse("product", kwargs={'slug': item.slug})}">
                     <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
                         <img src="/media/{item.image}" alt="IMG-PRODUCT" style="height: 360px;">
@@ -88,17 +101,18 @@ def render_item_block(item, show_discount=False):
                                 <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
                             </a>
                             <div class="block2-btn-addcart w-size1 trans-0-4">
-                                <a href="{reverse("product", kwargs={'slug': item.slug})}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                    Add to Cart
+                                <a href="{reverse("add-to-cart", kwargs={'slug': item.slug})}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                    Thêm vào giỏ
                                 </a>
                             </div>
                         </div>
                     </div>
                 </a>
-                <div class="block2-txt p-t-20">
-                    <a href="{reverse("product", kwargs={'slug': item.slug})}" class="block2-name dis-block s-text3 p-b-5">{item.title}</a>
-                    {discount_html}
+                <div class="block2-txt p-t-20" style =" height : 94px;">
+                    <a href="{reverse("product", kwargs={'slug': item.slug})}" class="block2-name dis-block s-text3 p-b-5" style ="height: 50px">{item.title}</a>
+                    
                 </div>
+                {discount_html}
             </div>
         </div>
     """
@@ -126,7 +140,7 @@ def deepest_discount_items():
     """
     items = Item.objects.annotate(
         discount_ratio=ExpressionWrapper(F('discount_price') / F('price'), output_field=FloatField())
-    ).filter(is_active=True, discount_price__isnull=False).order_by('-discount_ratio')[:6]
+    ).filter(is_active=True, discount_price__isnull=False).order_by('discount_ratio')[:6]
 
     item_div_list = ""
 

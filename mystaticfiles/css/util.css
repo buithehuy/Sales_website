@@ -2348,6 +2348,7 @@
 */
 .bgwhite {background-color: white;}
 .bgblack {background-color: black;}
+.bggray {background-color: gray;}
 
 
 
@@ -3736,6 +3737,7 @@ SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE
 .bg8 {background-color: #e6e6e6;}
 .bg9 {backdrop-filter: blur(5px);
     background-color: rgba(255, 255, 255, 0.5);}
+.bg10 {background-color:  #FF0000;}
 
 .bg-img1 {
 	background-repeat: no-repeat;

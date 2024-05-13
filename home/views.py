@@ -272,19 +272,18 @@ def log_in(request):
         form = AuthenticationForm()
         return render(request, 'login.html')
 
-def get_shop(request):
-    object_list = Item.objects.all().values()
-    context = {
-        'paginate_by' : 6,
-        'object_list' : object_list,
-    }
-    return render(request, "shop.html",context)
 def get_product(request,slug):
     product = Item.objects.get(slug=slug)
-    order = Order.objects.get_or_create(user=request.user, ordered=False)
-    rececentViewed = RecentlyViewedItems.objects.create(user=request.user,item=product,date = datetime.datetime.now())
     template_name = "product-detail.html"
-    return render(request,template_name,{'object':product,'order':order})
+    if request.user.is_authenticated:
+
+        order = Order.objects.get_or_create(user=request.user, ordered=False)
+
+
+        rececentViewed = RecentlyViewedItems.objects.create(user=request.user,item=product,date = datetime.datetime.now())
+        return render(request,template_name,{'object':product,'order':order})
+    
+    return render(request,template_name)
 
 def add_to_cart(request, slug):
     item = Item.objects.get(slug=slug)
@@ -314,11 +313,15 @@ def add_to_cart(request, slug):
     return redirect("order-summary")
 
 
-def get_category(request, slug):
-    category = Category.objects.get(slug=slug)
-    items = Item.objects.filter(category=category, is_active=True)
-
+def get_category(request, slug=None):
     sorting = request.GET.get('sorting')
+
+    if slug:
+        category = Category.objects.get(slug=slug)
+        items = Item.objects.filter(category=category, is_active=True)
+    else:
+        items = Item.objects.all()
+
     if sorting == 'deepest_discount':
         items = items.filter(discount_price__isnull=False).annotate(
             discount_ratio=ExpressionWrapper(F('discount_price') / F('price'), output_field=FloatField())
@@ -330,10 +333,11 @@ def get_category(request, slug):
 
     context = {
         'object_list': items,
-        'category_title': category,
-        'category_description': category.description,
-        'category_image': category.image
+        'category_title': category.title if slug else None,
+        'category_description': category.description if slug else None,
+        'category_image': category.image if slug else None
     }
+
     return render(request, "category.html", context)
 
 

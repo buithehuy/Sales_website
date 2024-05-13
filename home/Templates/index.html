@@ -101,13 +101,39 @@
 	<section class="banner bgwhite p-t-40 p-b-40" >
 		<div class="container">
 			<div class="row">
-				<div class="leftbar" style=" height: 570px;overflow-y: auto; width : 34%">
-					{% categories_div %}
-				</div>
+				<div class="category-wrapper m-r-10 bggray wrap-pic-cir-km">
+					<div style="display: flex;" >
+					<span class="icon p-r-10 fs-25 text-white"><ion-icon name="menu"></ion-icon></span>
+					<h2 class="text-white p-b-10">Danh mục sản phẩm</h2>
+					</div>
+					
 
-				<section class="slide1" style="width: 66%">
-					<div class="wrap-slick1">
-						<a  href="/shop">
+					
+					
+					<div  style="height: 500px; overflow-y: auto;">
+						{% categories_div %}
+					</div>
+				</div>
+				<style>
+					.category-wrapper {
+						border: 1px solid #ccc;
+						padding: 10px;
+						margin-bottom: 20px;
+						height: 570px;
+						width: 33%
+					}
+					
+					.category-wrapper h2 {
+						margin-top: 0;
+						font-size: 1.2em;
+						color: #333;
+					}
+					
+				</style>
+
+				<section class="slide1 wrap-pic-cir-km" style="width: 66%">
+					<div class="wrap-slick1 wrap-pic-cir-km">
+						<a  href="/category">
 							<div class="slick1">
 				
 								{% slides %}
@@ -161,10 +187,10 @@
 		}
 	</style>
 	<section class="newproduct bgwhite p-t-45 p-b-105">
-		<div class="container bg0 wrap-pic-cir-km" >
+		<div class="container bg10 wrap-pic-cir-km" >
 			<div class="sec-title p-b-60 ">
 				<h3 class="m-text9 t-left " style = "margin-top:50px;">
-					Khuyến mãi hot 🔥🔥🔥
+					⚡Khuyến mãi hot 🔥🔥🔥
 				</h3>
 			</div>
 			<div class="container ">
