@@ -48,17 +48,72 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li style="padding:0px; padding-top:10px">
-								<div class="search-product pos-relative bo4 of-hidden" style="border-radius: 10px;border-color: black; width: 500px;height: 50px; ">
+								<div class="search-product pos-relative bo4 " style="border-radius: 10px;border-color: black; width: 500px;height: 50px;">
 									<form action="/category" method="GET">
-										
-							
-									<input class="s-text7 p-l-23 p-r-50"  type="text" name="search-product" placeholder="Tìm kiếm sảm phẩm..." style="margin-top: 14px" value="{{ search_pro }}">
-										
-									<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-									<i class="fs-12 fa fa-search" aria-hidden="true"></i>
-									</button>
+										<input class="s-text7 p-l-23 p-r-50" id="search-product" type="text" name="search-product" placeholder="Tìm kiếm sản phẩm..." style="margin-top: 14px" value="{{ search_pro }}">
+										<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+											<i class="fs-12 fa fa-search" aria-hidden="true"></i>
+										</button>
 									</form>
+									<div id="suggestions-container" style="position: absolute; top: 100%; left: 0; right: 0; background: white; z-index: 10;"></div>
 								</div>
+								
+								<script>
+								document.getElementById('search-product').addEventListener('input', function() {
+									const query = this.value;
+									if (query.length > 0) {
+										fetch(`/search-suggestions/?query=${query}`)
+											.then(response => response.json())
+											.then(data => {
+												const suggestionsContainer = document.getElementById('suggestions-container');
+												suggestionsContainer.innerHTML = '';
+												data.suggestions.forEach(item => {
+													const suggestionItem = document.createElement('div');
+													suggestionItem.classList.add('suggestion-item');
+													suggestionItem.innerHTML = `
+														<a href="${item.url}">
+															<img src="${item.image_url}" alt="${item.name}" style="width: 50px; height: 50px;"/>
+															<span>${item.name}</span> <span>${item.price}₫</span>
+															
+														</a>
+													`;
+													suggestionsContainer.appendChild(suggestionItem);
+												});
+											});
+									} else {
+										document.getElementById('suggestions-container').innerHTML = '';
+									}
+								});
+								</script>
+								<style>
+									#suggestions-container {
+										border: 1px solid #ddd;
+										max-height: 300px;
+										overflow-y: auto;
+										margin-top: 5px;
+									}
+									
+									.suggestion-item {
+										padding: 10px;
+										border-bottom: 1px solid #eee;
+									}
+									
+									.suggestion-item:last-child {
+										border-bottom: none;
+									}
+									
+									.suggestion-item a {
+										text-decoration: none;
+										color: black;
+										display: flex;
+										align-items: center;
+									}
+									
+									.suggestion-item img {
+										margin-right: 10px;
+									}
+									
+								</style>
 
 								
 

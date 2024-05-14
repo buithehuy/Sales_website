@@ -89,10 +89,10 @@ class Item(models.Model):
     def __str__(self):
         return self.title
 
-    # def get_absolute_url(self):
-    #     return reverse("product/", kwargs={
-    #         'slug': self.slug
-    #     })
+    def get_absolute_url(self):
+        return reverse("product", kwargs={
+            'slug': self.slug
+        })
     def get_add_to_cart_url(self):
         return reverse(":add-to-cart", kwargs={
             'slug': self.slug
@@ -254,6 +254,5 @@ class Profile(models.Model):
     @property
     def get_avatar(self):
         return self.avatar.url
-
 
 

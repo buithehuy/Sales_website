@@ -26,6 +26,23 @@ from unidecode import unidecode
 import random
 import string
 
+
+from django.http import JsonResponse
+def search_suggestions(request):
+    query = request.GET.get('query', '')
+    if query:
+        products = Item.objects.filter(title__icontains=query)[:5]
+        suggestions = []
+        for product in products:
+            suggestions.append({
+                'name': product.title,
+                'price': product.price,
+                'url': product.get_absolute_url(),  # Assuming you have this method
+                'image_url': product.image.url if product.image else None  # Adjust based on your model
+            })
+        return JsonResponse({'suggestions': suggestions})
+    return JsonResponse({'suggestions': []})
+
 # chay tren docker 
 # mydb = mysql.connector.connect(
 #     host='db',

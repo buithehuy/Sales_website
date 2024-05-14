@@ -19,6 +19,7 @@ urlpatterns = [
     path('get_coupon/', views.get_coupon, name='get_coupon'),
     
 
+    path('search-suggestions/', views.search_suggestions, name='search_suggestions'),
 
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path('login/', views.log_in, name='login'),
