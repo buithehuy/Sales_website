@@ -1,0 +1,65 @@
+[
+    {
+        "name": "Tai nghe chụp tai Gaming Sony Inzone H3",
+        "price": "1290000",
+        "specs": {
+            "Cổng kết nối": "3.5mm",
+            "Công nghệ âm thanh": "360 Spatial Sound",
+            "Micro": "Có",
+            "Tương thích": "Các thiết bị có jack cắm 3.5 mm",
+            "Tính năng khác": "Micro boom",
+            "Kích thước driver": "40 mm",
+            "Phương thức điều khiển": "Nút bấm vật lý",
+            "Hãng sản xuất": "Sony"
+        }
+    },
+    {
+        "name": "Tai nghe không dây chụp tai Gaming Logitech G435",
+        "price": "1490000",
+        "specs": {
+            "Thời lượng pin": "18 giờ",
+            "Kích thước driver": "40 mm",
+            "Phương thức điều khiển": "Nút vật lý",
+            "Hãng sản xuất": "Logitech",
+            "Tính năng khác": "163×170×71 mm"
+        }
+    },
+    {
+        "name": "Tai nghe Gaming JBL Quantum One",
+        "price": "2590000",
+        "specs": {
+            "Cổng kết nối": "3.5mm",
+            "Công nghệ âm thanh": ["Chống ồn chủ động ANC", "JBL QuantumSPHERE 360™", "Âm thanh 360 độ", "Hi-Res"],
+            "Micro": "Có",
+            "Tương thích": ["PC", "Xbox", "PlayStation", "Nintendo Switch", "Mobile", "Mac", "VR"],
+            "Kích thước driver": "50 mm",
+            "Phương thức điều khiển": "Nút bấm vật lý",
+            "Hãng sản xuất": "JBL"
+        }
+    },
+    {
+        "name": "Tai nghe Gaming chụp tai không dây Sony INZONE H5",
+        "price": "3090000",
+        "specs": {
+            "Thời lượng pin": "28 giờ",
+            "Công nghệ âm thanh": "360 Spatial Sound",
+            "Micro": "Có",
+            "Tương thích": "Các thiết bị có hỗ trợ bộ thu phát USB",
+            "Tính năng khác": "Chống ồn đàm thoại",
+            "Kích thước driver": "40mm",
+            "Hãng sản xuất": "Sony"
+        }
+    },
+    {
+        "name": "Tai nghe Gaming chụp tai Sony Inzone H9",
+        "price": "4790000",
+        "specs": {
+            "Thời lượng pin": "32 giờ",
+            "Công nghệ âm thanh": ["ECM", "360 Spatial Sound", "Công nghệ cảm biến tiếng ồn kép khử mọi âm thanh xung quanh", "Chế độ âm thanh xung quanh"],
+            "Micro": "Có",
+            "Tương thích": "Các thiết bị có hỗ trợ Bluetooth và cổng Type-C",
+            "Tính năng khác": ["Có thể vừa chơi vừa sạc", "Kích thước driver: 40 mm", "Phương thức điều khiển: Nút bấm vật lý", "Phạm vi kết nối: 10m"],
+            "Hãng sản xuất": "Sony"
+        }
+    }    
+]

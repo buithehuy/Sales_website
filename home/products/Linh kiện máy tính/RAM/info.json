@@ -1,0 +1,63 @@
+[
+    {
+        "name": "RAM Kingston FURY Beast RGB 16GB (2x8GB) DDR4 3200MHz (KF432C16BB2AK216)",
+        "price": "1590000",
+        "specs": {
+            "Dung lượng cấu hình": "2x8GB",
+            "Chuẩn kết nối": "DDR4",
+            "Tương thích": "Intel & AMD Chipset",
+            "Bus XMP": "3200 Mhz",
+            "Độ trễ XMP": "CL16-18-18",
+            "Điện áp XMP": "1.35V",
+            "Tự sửa lỗi ECC": "Không",
+            "Tản nhiệt": "Có",
+            "LED": "Có"
+        }
+    },
+    {
+        "name": "RAM PC Kingston Fury Beast Black 16GB 3200MHz DDR4 KF432C16BB116",
+        "price": "1090000",
+        "specs": {
+            "Dung lượng": "16GB",
+            "Bus RAM": "3200MHz",
+            "Hỗ trợ DIMM": "(PC, Desktop)",
+            "Timing": "CL16-18-18",
+            "Voltage": "1.35V",
+            "Hãng sản xuất": "Kingston"
+        }
+    },
+    {
+        "name": "RAM Laptop Lexar 16GB 3200MHZ DDR4",
+        "price": "900000",
+        "specs": {
+            "Dung lượng": "16GB",
+            "Bus RAM": "3200MHz",
+            "Hỗ trợ SO-DIMM": "(Laptop)",
+            "Voltage": "1.2V",
+            "Hãng sản xuất": "LEXAR"
+        }
+    },
+    {
+        "name": "RAM Laptop Kingston Sodimm 1.2V 16GB 3200MHz CL22",
+        "price": "1150000",
+        "specs": {
+            "Dòng điện vào": "1.2V",
+            "Dung lượng": "16GB",
+            "Bus RAM": "3200MHz",
+            "Hỗ trợ SO-DIMM": "(Laptop)",
+            "Voltage": "1.2v",
+            "Hãng sản xuất": "Kingston"
+        }
+    },
+    {
+        "name": "RAM PC ADATA XPG D50 RGB 16GB (1x16GB) 3200MHz DDR4",
+        "price": "1190000",
+        "specs": {
+            "Dung lượng": "16GB",
+            "Bus RAM": "3200MHz",
+            "Hỗ trợ DIMM": "(PC, Desktop)",
+            "Voltage": "1.35V - 1.5V",
+            "Hãng sản xuất": "ADATA"
+        }
+    }
+]

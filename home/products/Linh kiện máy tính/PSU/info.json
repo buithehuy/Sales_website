@@ -1,0 +1,51 @@
+[
+    {
+        "name": "Nguồn máy tính Xigmatek X-Power III III 650 600W",
+        "price": "890000",
+        "specs": {
+            "Công suất nguồn": "600W",
+            "Quạt làm mát": "120 mm (1)",
+            "Hãng sản xuất": "XIGMATEK"
+        }
+    },
+    {
+        "name": "Nguồn máy tính DeepCool PK650D 650W",
+        "price": "10900000",
+        "specs": {
+            "Công suất nguồn": "650W",
+            "Quạt làm mát": "120mm",
+            "Tiêu chuẩn nguồn": "80 Plus Bronze",
+            "Hãng sản xuất": "DeepCool"
+        }
+    },
+    {
+        "name": "Nguồn máy tính DeepCool PM750 750W",
+        "price": "1750000",
+        "specs": {
+            "Công suất nguồn": "750W",
+            "Quạt làm mát": "120mm",
+            "Tiêu chuẩn nguồn": "80 Plus Gold",
+            "Hãng sản xuất": "DeepCool"
+        }
+    },
+    {
+        "name": "Nguồn máy tính DeepCool PF450D 450W",
+        "price": "670000",
+        "specs": {
+            "Công suất nguồn": "450W",
+            "Quạt làm mát": "1x 120mm",
+            "Tiêu chuẩn nguồn": "80 Plus",
+            "Hãng sản xuất": "DeepCool"
+        }
+    },
+    {
+        "name": "Nguồn máy tính Xigmatek X-Power III 450 400W",
+        "price": "650000",
+        "specs": {
+            "Công suất nguồn": "400W",
+            "Quạt làm mát": "120 mm (1)",
+            "Hãng sản xuất": "XIGMATEK"
+        }
+    }
+    
+]

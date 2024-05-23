@@ -1,0 +1,84 @@
+[
+    {
+        "name": "Case máy tính DeepCool Macube 110",
+        "price": "950000",
+        "specs": {
+            "Loại case": "Mid Tower",
+            "Hỗ trợ quạt": [
+                "Lắp sẵn: Mặt sau1× 120 mm DC",
+                "Tùy chọ: Mặt trước: 3x 120 mm / 2x 140 mm",
+                "Phía trên: 2x 120 mm / 2x 140 mm"
+                
+            ],
+            "Số khe cắm PCI": "4x PCI",
+            "Kích thước": "400 x 225 x 431 mm (L x W x H)",
+            "Hãng sản xuất": "DeepCool",
+            "Chất liệu": "ABS + SPCC + Kính cường lực",
+            "Cổng giao tiếp": ["2x USB 3.0", "1x Audio"]
+        }
+    },
+    {
+        "name": "Case máy tính Xigmatek Endorphin M",
+        "price": "650000",
+        "specs": {
+            "Loại case": "Mid Tower",
+            "Hỗ trợ quạt": [
+                "Trên: 3x 120mm / 3 x 140 mm",
+                "Dưới: 1 x 120mm / 1 x 140 mm",
+                "Sau: x 120mm / 1 x 140mm",
+                "MP Panel: 3 x 120mm"
+            ],
+            "Số khe cắm PCI": "7",
+            "Kích thước": "434 × 245 × 473 mm",
+            "Hãng sản xuất": "XIGMATEK"
+        }
+    },
+    {
+        "name": "Case máy tính DeepCool CH370",
+        "price": "1380000",
+        "specs": {
+            "Loại case": "Mid Tower",
+            "Hỗ trợ quạt": [
+                "Mặt trước: 3×120 / 2×140mm",
+                "Trên: 2×120 / 2×140mm",
+                "Phía sau: 1×120mm"
+            ],
+            "Số khe cắm PCI": "4",
+            "Kích thước": "413 × 215 × 431 mm",
+            "Hãng sản xuất": "DeepCool",
+            "Chất liệu": "ABS+ SPCC + Kính cường lực"
+        }
+    },
+    {
+        "name": "Case máy tính Xigmatek Cubi Arctic",
+        "price": "2290000",
+        "specs": {
+            "Loại case": "Mid Tower",
+            "Hỗ trợ quạt": [
+                "Nóc: 120mm x 3",
+                "Sau: 120mm x 1",
+                "Đáy: 120mm x 3",
+                "Mặt MB: 120mm x 2"
+            ],
+            "Số khe cắm PCI": "7",
+            "Kích thước": "428 x 310 x 473 mm",
+            "Hãng sản xuất": "XIGMATEK"
+        }
+    },
+    {
+        "name": "Case máy tính Xigmatek Endorphin Air Arctic",
+        "price": "990000",
+        "specs": {
+            "Loại case": "Mid Tower",
+            "Hỗ trợ quạt": [
+                "Nóc: 120mm x 3",
+                "Sau: 120mm x 1",
+                "Đáy: 120mm x 3",
+                "Mặt MB: 120mm x 2"
+            ],
+            "Số khe cắm PCI": "7",
+            "Kích thước": "435 x 218 x 456 mm",
+            "Hãng sản xuất": "XIGMATEK"
+        }
+    }    
+]

@@ -1,0 +1,106 @@
+[
+    {
+      "name": "Tai nghe Gaming chụp tai không dây Sony INZONE H5",
+      "price": "3090000",
+      "specs": {
+        "Thời lượng pin": "28 giờ",
+        "Công nghệ âm thanh": "360 Spatial Sound",
+        "Micro": "Có",
+        "Tương thích": "Các thiết bị có hỗ trợ bộ thu phát USB",
+        "Tính năng khác": "Chống ồn đàm thoại",
+        "Kích thước driver": "40mm",
+        "Hãng sản xuất": "Sony"
+      }
+    },
+    {
+      "name": "Tay cầm chơi game PS5 Dualsense",
+      "price": "1890000",
+      "specs": {
+        "Pin": "Lithium-ion có thể sạc lại",
+        "Hãng sản xuất": "Sony",
+        "Kết nối": "Máy chơi game PS5",
+        "Cổng giao tiếp": [
+          "1 x Cổng USB Type-C® (USB tốc độ cao)",
+          "1 x Giắc cắm tai nghe âm thanh nổi"
+        ],
+        "Dung lượng Pin": "1.560mAh",
+        "Cảm biến": "Hệ thống cảm biến chuyển động SIXAXIS (con quay hồi chuyển ba trục + gia tốc kế ba trục)",
+        "Tính năng khác": [
+          "Nút tắt bật mic tiện lợi",
+          "Tính năng Adaptive Trigger cho trải nghiệm lực và độ căng khác nhau",
+          "Tính năng Haptic Feedback cho phản hồi rung chân thực",
+          "Tích hợp Jack Audio kiêm Micro trên tay cầm",
+          "Lưu lại Gameplay và chia sẻ nó qua nút Share"
+        ]
+      }
+    },
+    {
+      "name": "Tay cầm chơi game Xbox Series X Controller Chính Hãng",
+      "price": "1690000",
+      "specs": {
+        "Tương thích": "Windows",
+        "Hãng sản xuất": "Microsoft",
+        "Chất liệu": "Nhựa nhám",
+        "Cổng giao tiếp": "USB - C"
+      }
+    },
+    {
+      "name": "Tay cầm chơi game Dareu H105",
+      "price": "649000",
+      "specs": {
+        "Hãng sản xuất": "DAREU",
+        "Chất liệu": "Nhựa",
+        "Kết nối": [
+          "Wireless 2.4G",
+          "Cáp USB Type-C",
+          "Bluetooth"
+        ],
+        "Lõi pin": "Pin lithium",
+        "Dung lượng Pin": "930 mAh",
+        "Tính năng khác": [
+          "Hỗ trợ Rung với 2 motor",
+          "Hỗ trợ Turbo / Macro nút bấm"
+        ],
+        "Tiện ích": "Tương thích với PC/Android (Windows 7/8/10/11, Android 5.0,...)"
+      }
+    },
+    {
+      "name": "Tay cầm chơi game không dây Rapoo V600S",
+      "price": "650000",
+      "specs": {
+        "Hãng sản xuất": "Rapoo",
+        "Kết nối": [
+          "Wireless",
+          "USB Type-C"
+        ],
+        "Tính năng khác": [
+          "3 nút đa chức năng",
+          "Tích hợp chế độ rung"
+        ]
+      }
+    },
+    {
+      "name": "Tay cầm chơi game Dareu H101X",
+      "price": "599000",
+      "specs": {
+        "Hãng sản xuất": "DAREU",
+        "Chất liệu": "Nhựa",
+        "Kết nối": [
+          "Cáp USB Type-C",
+          "Bluetooth 5.0"
+        ],
+        "Lõi pin": "Pin lithium",
+        "Dung lượng Pin": "650 mAh",
+        "Phạm vi kết nối": [
+          "Cáp: 1.8 m",
+          "Bluetooth: 10 m"
+        ],
+        "Tính năng khác": [
+          "Hỗ trợ Rung với 2 motor",
+          "Hỗ trợ Turbo / Motion control"
+        ],
+        "Tiện ích": "Tương thích với PC, Android, Nintendo Switch (Windows 7/8/10/11, Android 5.0,...)"
+      }
+    }
+  ]
+  
