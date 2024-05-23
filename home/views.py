@@ -7,7 +7,7 @@ from django.core.mail import EmailMessage, send_mail
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from Sales_website import settings
-from django.utils import timezone
+from django.utils import timezone 
 import json
 from django.db.models import F, FloatField, ExpressionWrapper
 
@@ -22,10 +22,15 @@ import mysql.connector
 import datetime
 from  .models import *
 from .forms import CheckoutForm, CouponForm, RefundForm
-from unidecode import unidecode
+from .add_data import add_data,create_categories
 import random
 import string
 
+
+############################
+# create_categories()
+# add_data()
+#############################
 
 from django.http import JsonResponse
 def search_suggestions(request):
@@ -57,68 +62,6 @@ mydb = mysql.connector.connect(
 #     password='',
 #     database = 'sales_website'
 # )
-def decode_spec(dic):
-    text = ''
-    for key in dic.keys():
-        text += key + ' ' + dic[key]
-    return text
-def decode_product(dic):
-    if 'name' in dic:
-        name = dic['name']
-        price = dic['price']
-        specs = decode_spec(dic['specs'])
-        return [name,price,specs]
-    else:
-        return dic
-
-with open('home/data/products/Gaming Gear/chuột/info.json','r+',encoding='UTF-8') as inp:
-    data = inp.read()
-    specs = json.loads(data,object_hook=decode_product)
-
-# with open('home/data/products/Linh kiện máy tính/mainboard/info.json','r+',encoding='UTF-8') as inp:
-#     data = inp.read()
-#     specs = json.loads(data,object_hook=decode_product)
-# Category.objects.create(
-#     title= 'Mouse',
-#     description = 'Chuột PC',
-#     slug = 'mouse',
-#     image = 'media_root/add.webp'
-# )
-# Category.objects.create(
-#     title= 'Mainboard',
-#     description = 'Bo mạch chủ',
-#     slug= 'mainboard',
-#     image = 'media_root/add.webp'
-# )
-def get_slug(str):
-    str = str.lower()
-    str = unidecode(str)
-    str = str.replace(' ', '-')
-    str = str.replace('(', '')
-    str = str.replace(')', '')
-    str = str.replace('/', '')
-    return str
-# #
-# count = 1
-
-# for i in specs:
-#     Item.objects.create(
-#         title= i[0],
-#         price = int(i[1]) + 10000,
-#         discount_price= int(i[1]),
-#         label = 'N',
-#         stock_no = 'yes',
-#         description_short = "Chuột cho PC",
-#         description_long = i[2],
-#         image = f'{i[0]}.jpg',
-#         image2 = f'no',
-#         image3 = f'no',
-#         is_active = True,
-#         category = Category.objects.get(title='Mouse'),
-#         slug = get_slug(i[0][:10]) + f'-{count}'
-#     )
-#     count += 1
-
 
 # Create your views here.
 def get_home(request) :
@@ -170,6 +113,8 @@ def signup(request):
         myuser.last_name = lname
         myuser.is_active = False
         myuser.save()
+        Order.objects.create(
+            user=myuser, ordered_date=ordered_date)
         messages.success(request,
                          "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
 
@@ -537,9 +482,13 @@ def post_refund(request):
                 return redirect("request-refund")
 
 def profile(request):
-    user_info = InfoUser.objects.get(user = request.user)
-    view_list = RecentlyViewedItems.objects.filter(user=request.user).order_by('-date')[:3]
-    return render(request, 'profile.html',{'User_info': user_info,'view_list':view_list})
+    if request.user.is_superuser is True:
+        return redirect('/logout')
+    else:
+        user_info = InfoUser.objects.get(user = request.user)
+        view_list = RecentlyViewedItems.objects.filter(user=request.user).order_by('-date')[:3]
+        return render(request, 'profile.html',{'User_info': user_info,'view_list':view_list})
+    
 
 def profile_edit(request):
     user_info = InfoUser.objects.get(user = request.user)
