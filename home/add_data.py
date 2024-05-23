@@ -52,11 +52,11 @@ def get_slug(str):
     str = str.replace('/', '')
     return str
 
-def create_categories(cate,des):
+def create_categories():
     for i in range(len(cate)):
         Category.objects.create(
         title= cate[i],
-        description = des[i],
+        description = description[i],
         slug = get_slug(cate[i]),
         image = 'media_root/add.webp'
         )
@@ -67,7 +67,7 @@ for p in path:
         data = inp.read()
         specs.append(json.loads(data,object_hook=decode_product))
 
-def add_data(specs, cate, des):
+def add_data():
     count = 1
     for i in range(len(cate) - 1):
         for s in specs[i]:
@@ -77,7 +77,7 @@ def add_data(specs, cate, des):
                 discount_price= int(s[1]),
                 label = 'N',
                 stock_no = 'yes',
-                description_short = des[i],
+                description_short = description[i],
                 description_long = s[2],
                 image = f'{s[0]}.jpg',
                 image2 = f'no',

@@ -43,6 +43,16 @@ class InfoUser(models.Model):
     gender = models.CharField(max_length=100)
     image = models.ImageField(default=None)
 
+class ShipAddress(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    phone = models.CharField(max_length=100)
+    address_detail = models.CharField(max_length=100,default='no')
+    address_detail2 = models.CharField(max_length=100,default='no')
+    city = models.CharField(max_length=100,default='no')
+    district = models.CharField(max_length=100,default='no')
+    xa = models.CharField(max_length=100,default='no')
+    
 
 
 class Slide(models.Model):
@@ -70,6 +80,13 @@ class Category(models.Model):
             'slug': self.slug
         })
 
+class FeedBack(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    items = models.CharField(max_length=100)
+    content = models.TextField()
+    start = models.IntegerField()
+
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
@@ -85,6 +102,7 @@ class Item(models.Model):
     image2 = models.ImageField(default=None)
     image3 = models.ImageField(default=None)
     is_active = models.BooleanField(default=True)
+    feedback = models.ManyToManyField(FeedBack)
 
     def __str__(self):
         return self.title

@@ -1,7 +1,6 @@
 from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-
 from home.models import Profile
 
 PAYMENT_CHOICES = (
@@ -22,6 +21,11 @@ class CheckoutForm(forms.Form):
     city = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control'
     }))
+
+    district = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control'
+    }))
+
     zip = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control'
     }))

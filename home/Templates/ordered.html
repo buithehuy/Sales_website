@@ -1,0 +1,137 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+<style>
+    button {
+  font-family: monospace;
+  background-color: #f3f7fe;
+  color: #3b82f6;
+  border: none;
+  border-radius: 8px;
+  width: 100px;
+  height: 45px;
+  transition: .3s;
+}
+
+button:hover {
+  background-color: #3b82f6;
+  box-shadow: 0 0 0 5px #3b83f65f;
+  color: #fff;
+}
+
+.button2 {
+  font-family: monospace;
+  background-color: #f3f7fe;
+  color: #FFA500;
+  border: none;
+  border-radius: 8px;
+  width: 100px;
+  height: 45px;
+  transition: .3s;
+}
+
+.button2:hover {
+  background-color: #FFA500;
+  box-shadow: 0 0 0 5px #FF8C00;
+  color: #fff;
+}
+
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2> Đơn hàng đã đặt thành công </h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"> Tình trạng đơn hàng </th>
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Tên sảm phẩm</th>
+            <th scope="col">Giá </th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Tổng thanh toán</th>
+            <th scope="col">Mã đơn hàng</th>
+          </tr>
+        </thead>
+     
+        {% for object in objects %}
+        <tbody>
+          {% for order_item in object.items.all %}
+          <tr>
+            {% if object.received %}
+            <td scope="row" style="color: darkseagreen;"> Giao hàng thành công </td>
+            {% else %}
+            <td scope="row">Chưa nhận được</td>
+            {% endif%}
+            <td>
+			<img src="{{ order_item.item.image.url }}" style="width: 130px;"> 
+            </td>
+            <td>{{ order_item.item.title }}</td>
+            <td>{{ order_item.item.price }}</td>
+
+            <td>
+            {{ order_item.quantity }}
+            </td>
+            <td>
+              {% if order_item.item.discount_price %}
+                  ${{ order_item.get_total_discount_item_price}}
+                  <span class="badge badge-primary">  Tiết kiệm {{ order_item.get_amount_saved }} VNĐ</span>
+              {% else %}
+                  ${{ order_item.get_total_item_price}}
+              {% endif %}
+            </td>
+            <td>{{object.ref_code}}</td>
+            <td>
+                {% if object.received %}
+                <a href= "{% url 'feedback' order_item.item.title %}"   class="button2" >
+                    Đánh giá sản phẩm
+                  </a> 
+                {% else %}
+                <form method="POST" >
+                    {% csrf_token %}
+                <button type="submit" value="{{object.ref_code}}" name="received" >
+                Đã nhận được hàng
+              </button> 
+                </form>
+              {% endif %}
+            
+            </td>
+
+          </tr>
+          {% empty %}
+          <tr>
+			<td colspan="5"> Bạn chưa đặt đơn hàng nào</td>
+          </tr>
+          {% endfor %}
+ </tbody>
+        {% endfor %}
+       
+        
+
+
+
+
+
+
+        {% if object.coupon %}
+        <tr>
+          <td colspan="5"><b>Thêm mã giảm giá : </b></td>
+          <td>- ${{ object.coupon.amount }}</td>
+        </tr>
+        {% endif%}
+        {% if object.get_total %}
+        <tr>
+        	<td colspan="5">
+        		<a href="/checkout" class="btn btn-warning float-right ml-2">Tiếp tục</a>
+        		<a href="/" class="btn btn-primary float-right">Quay trở lại shop</a>
+
+        	</td>
+        </tr>
+        {% endif %}
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

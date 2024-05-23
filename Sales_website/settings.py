@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'Sales_website.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-###### chạy trên docker
+##### chạy trên docker
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.mysql',

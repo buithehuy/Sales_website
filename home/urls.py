@@ -7,6 +7,10 @@ urlpatterns = [
     path('category/product/<slug>/', views.get_product, name='product'),
     path('category/<slug>/', views.get_category, name='category'),
     path('order-summary/', views.get_ordersum, name='order-summary'),
+    path('ordered/', views.get_ordered, name='ordered'),
+    path('feedback/<titles>/', views.add_feedback, name='feedback'),
+
+    path('checkout/complete', views.order_complete, name='complete'),
     
     path('add-to-cart/<slug>/', views.add_to_cart, name='add-to-cart'),
     path('checkout/', views.get_checkout, name='checkout'),

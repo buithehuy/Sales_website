@@ -48,7 +48,7 @@ def search_suggestions(request):
         return JsonResponse({'suggestions': suggestions})
     return JsonResponse({'suggestions': []})
 
-# chay tren docker 
+# # chay tren docker 
 mydb = mysql.connector.connect(
     host='db',
     user='your_username',
@@ -76,8 +76,50 @@ def get_ordersum(request):
         }
         return render(request, 'order_summary.html', context)
     except ObjectDoesNotExist:
-        messages.error(request, "You do not have an active order")
+        messages.error(request, "Bạn chưa có đơn hàng nào")
         return redirect("/")
+
+def get_ordered(request):
+    try:
+        order = Order.objects.filter(user=request.user, ordered=True)
+        context = {
+                'objects': order
+        }
+        if request.method == 'POST':
+            if 'received' in request.POST:
+                code = request.POST['received']
+                order = Order.objects.get(user=request.user, ordered=True,ref_code=code)
+                order.received = True
+                order.save()
+                return redirect('ordered')
+
+        return render(request, 'ordered.html', context)
+    except ObjectDoesNotExist:
+        messages.error(request, "Bạn chưa có đơn hàng nào")
+        return redirect("/")
+    
+def add_feedback(request,titles):
+    if request.method == 'POST':
+        title = request.POST['item_feed']
+        start = request.POST['rate']
+        content = request.POST['content']
+        item = Item.objects.get(title=title)
+        
+        feedback = FeedBack.objects.create(
+                    user = request.user,
+                    items = item,
+                    content = content,
+                    start = start
+                )
+        item.feedback.add(feedback)
+        return redirect('ordered')
+    try:
+        feedback = FeedBack.objects.get(user=request.user,items=titles)
+        return redirect('ordered')
+    except ObjectDoesNotExist:
+        item = Item.objects.get(title = titles)
+        return render(request, 'feedback.html',{'title':titles,'item':item})
+    
 def signup(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -114,7 +156,8 @@ def signup(request):
         myuser.is_active = False
         myuser.save()
         Order.objects.create(
-            user=myuser, ordered_date=ordered_date)
+            user=myuser, ordered_date=timezone.now(),ref_code=random.randint(10000,99999)  )
+        ShipAddress.objects.create(user = myuser)
         messages.success(request,
                          "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
 
@@ -210,7 +253,6 @@ def otp_confirmation(request):
             return render(request, 'otp_confirmation.html', {'msg': 'Incorrect OTP. Please try again.'})
     return render(request, 'otp_confirmation.html')
 
-
 def new_password(request):
     if request.method == 'POST':
         pass1 = request.POST['pass1']
@@ -237,6 +279,9 @@ def log_in(request):
         if user is not None:
             login(request, user)
             if user.is_superuser:
+
+                ShipAddress.objects.create(user = request.user)
+
                 return redirect('admin:index')
             else:
                 return redirect('home')
@@ -251,13 +296,14 @@ def log_in(request):
 def get_product(request,slug):
     product = Item.objects.get(slug=slug)
     template_name = "product-detail.html"
+    
     if request.user.is_authenticated:
-
-        order = Order.objects.get_or_create(user=request.user, ordered=False)
-
-
-        rececentViewed = RecentlyViewedItems.objects.create(user=request.user,item=product,date = datetime.datetime.now())
-        return render(request,template_name,{'object':product,'order':order})
+        try:
+            order = Order.objects.get(user=request.user, ordered=False)
+        except ObjectDoesNotExist:
+            order = Order.objects.create(user=request.user,ordered_date=timezone.now(),ref_code=random.randint(10000,99999) )
+            
+            return render(request,template_name,{'object':product,'order':order})
     
     return render(request,template_name,{'object':product})
 
@@ -284,7 +330,7 @@ def add_to_cart(request, slug):
         else:
             ordered_date = timezone.now()
             order = Order.objects.create(
-                user=request.user, ordered_date=ordered_date)
+                user=request.user, ordered_date=ordered_date,ref_code=random.randint(10000,99999) )
             order.items.add(order_item)
             messages.info(request, "Thêm thành công sảm phẩm vào giỏ hàng.")
         return redirect("order-summary")
@@ -337,24 +383,49 @@ def get_category(request, slug=None):
     return render(request, "category.html", context)
 
 
+
 def get_checkout(request):
         try:
             order = Order.objects.get(user=request.user, ordered=False)
-            form = CheckoutForm()
+            ship = ShipAddress.objects.get(user=request.user)
+            if request.method == 'POST':
+                method = request.POST['method']
+                address_detail = request.POST['address']
+                address_detail2 = request.POST['address2']
+                city = request.POST['city'] 
+                district = request.POST['district'] 
+                xa = request.POST['xa'] 
+                phone = request.POST['telphone'] 
+                if 'save_address' in request.POST:
+                    ship = ShipAddress.objects.get(user=request.user)
+                    ship.address_detail = address_detail
+                    ship.address_detail2 = address_detail2
+                    ship.phone = phone
+                    ship.district = district
+                    ship.xa = xa
+                    ship.city = city
+                    ship.save()
+                if method == 'tt':
+                    order.ordered = True
+                    order.save()
+                    return redirect('complete')
+
             context = {
-                'form': form,
                 'couponform': CouponForm(),
                 'order': order,
-                'DISPLAY_COUPON_FORM': True
+                'DISPLAY_COUPON_FORM': True,
+                'add_ship': ship  
             }
+
             return render(request, "checkout.html", context)
 
         except ObjectDoesNotExist:
-            messages.info(request, "You do not have an active order")
-            return redirect("checkout")    
+            ShipAddress.objects.create(user = request.user)
+            messages.info(request, "Bạn chưa có đơn hàng nào")
+            return redirect("home")    
 
 
-def remove_from_cart(request, slug):
+def remove_from_cart(request, slug): 
     item = Item.objects.get(slug=slug)
     order_qs = Order.objects.filter(
         user=request.user,
@@ -422,6 +493,8 @@ def get_coupon(request, code):
         messages.info(request, "This coupon does not exist")
         return None
 
+def order_complete(request):
+    return render(request,'complete_order.html')
 
 
 def add_coupon(request):
@@ -441,7 +514,7 @@ def add_coupon(request):
                 return redirect("checkout")
 
         except ObjectDoesNotExist:
-            messages.info(request, "You do not have an active order")
+            messages.info(request, "Bạn chưa có đơn hàng nào")
             return redirect("checkout")
 
 
