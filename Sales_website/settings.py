@@ -77,26 +77,26 @@ WSGI_APPLICATION = 'Sales_website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 ###### chạy trên docker
-# DATABASES = {
-#      'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'sales_website',
-#         'USER': 'your_username',
-#         'PASSWORD': 'your_password',
-#         'HOST': 'db',
-#         'PORT': ''
-#     }
-# }
-####### chạy trên  local
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "sales_website",
-        'USER': "root",
-        'PASSWORD': "",
-        'HOST': "localhost",
+        'NAME': 'sale_website',
+        'USER': 'your_username',
+        'PASSWORD': 'your_password',
+        'HOST': 'db',
+        'PORT': ''
     }
 }
+####### chạy trên  local
+# DATABASES = {
+#      'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': "sales_website",
+#         'USER': "root",
+#         'PASSWORD': "",
+#         'HOST': "localhost",
+#     }
+# }
 
 
 # Password validation

@@ -44,19 +44,19 @@ def search_suggestions(request):
     return JsonResponse({'suggestions': []})
 
 # chay tren docker 
+mydb = mysql.connector.connect(
+    host='db',
+    user='your_username',
+    password='your_password',
+    database = 'sale_website'
+)
+################ chạy trên local
 # mydb = mysql.connector.connect(
-#     host='db',
-#     user='your_username',
-#     password='your_password',
+#     host='localhost',
+#     user='root',
+#     password='',
 #     database = 'sales_website'
 # )
-################ chạy trên local
-mydb = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='',
-    database = 'sales_website'
-)
 def decode_spec(dic):
     text = ''
     for key in dic.keys():
@@ -71,13 +71,13 @@ def decode_product(dic):
     else:
         return dic
 
-# with open('home/data/products/Gaming Gear/chuột/info.json','r+',encoding='UTF-8') as inp:
-#     data = inp.read()
-#     specs = json.loads(data,object_hook=decode_product)
-#
-with open('home/data/products/Linh kiện máy tính/mainboard/info.json','r+',encoding='UTF-8') as inp:
+with open('home/data/products/Gaming Gear/chuột/info.json','r+',encoding='UTF-8') as inp:
     data = inp.read()
     specs = json.loads(data,object_hook=decode_product)
+
+# with open('home/data/products/Linh kiện máy tính/mainboard/info.json','r+',encoding='UTF-8') as inp:
+#     data = inp.read()
+#     specs = json.loads(data,object_hook=decode_product)
 # Category.objects.create(
 #     title= 'Mouse',
 #     description = 'Chuột PC',
@@ -89,7 +89,7 @@ with open('home/data/products/Linh kiện máy tính/mainboard/info.json','r+',e
 #     description = 'Bo mạch chủ',
 #     slug= 'mainboard',
 #     image = 'media_root/add.webp'
-
+# )
 def get_slug(str):
     str = str.lower()
     str = unidecode(str)
@@ -108,13 +108,13 @@ def get_slug(str):
 #         discount_price= int(i[1]),
 #         label = 'N',
 #         stock_no = 'yes',
-#         description_short = "Bo mạch chủ",
+#         description_short = "Chuột cho PC",
 #         description_long = i[2],
-#         image = f'{i[0]}.webp',
+#         image = f'{i[0]}.jpg',
 #         image2 = f'no',
 #         image3 = f'no',
 #         is_active = True,
-#         category = Category.objects.get(title='Mainboard'),
+#         category = Category.objects.get(title='Mouse'),
 #         slug = get_slug(i[0][:10]) + f'-{count}'
 #     )
 #     count += 1

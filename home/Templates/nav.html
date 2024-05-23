@@ -231,23 +231,24 @@
 		<!-- Header Mobile -->
 		<div class="wrap_header_mobile">
 			<!-- Logo moblie -->
-			<a href="index.html" class="logo-mobile">
-				<img src="{% static 'images/icons/logo.png' %}" alt="IMG-LOGO">
+			<a href="{% url 'home' %}" class="logo-mobile">
+				<p style="color: black;font-size: 40px; margin-bottom:10px"><b style="font-size: 60px;">B</b>igPC</p>
 			</a>
 
 			<!-- Button show menu -->
 			<div class="btn-show-menu">
 				<!-- Header Icon mobile -->
 				<div class="header-icons-mobile">
-					<a href="#" class="header-wrapicon1 dis-block">
-						<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
+					<a href="{% url 'profile' %}" class="header-wrapicon1 dis-block">
+						<span class="icon" style="margin-right: 5px; font-size : 30px;"><ion-icon name="person"></ion-icon></span>
 					</a>
 
 					<span class="linedivide2"></span>
 
 					<div class="header-wrapicon2">
-						<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">0</span>
+						<a href="{% url 'order-summary' %}" class="header-wrapicon1 dis-block">
+							<span class="icon" style="margin-right: 5px; font-size : 30px;"><ion-icon name="cart"></ion-icon></span>
+						</a>
 
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
@@ -342,20 +343,6 @@
 						</span>
 					</li>
 
-					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-						<div class="topbar-child2-mobile">
-							<span class="topbar-email">
-								fashe@example.com
-							</span>
-
-							<div class="topbar-language rs1-select2">
-								<select class="selection-1" name="time">
-									<option>USD</option>
-									<option>EUR</option>
-								</select>
-							</div>
-						</div>
-					</li>
 
 					<li class="item-topbar-mobile p-l-10">
 						<div class="topbar-social-mobile">
