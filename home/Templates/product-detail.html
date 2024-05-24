@@ -178,8 +178,8 @@
 					</h5>
 
 					<div class="dropdown-content dis-none p-t-15 p-b-23">
-						{% for feed_back in object.feedback.all %}
-						<h6>{{ feed_back.user }}</h6>
+						{% for feed_back in object.feedback.all %} 
+						<h6>{{ feed_back.user }}</h6> <h6 style="color: red"> {{ feed_back.start }} sao  </h6>
 						<p class="s-text8">
 							{{feed_back.content}}
 							

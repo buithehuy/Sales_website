@@ -69,7 +69,7 @@ for p in path:
 
 def add_data():
     count = 1
-    for i in range(len(cate) - 1):
+    for i in range(len(cate)):
         for s in specs[i]:
             Item.objects.create(
                 title= s[0],

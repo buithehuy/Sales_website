@@ -1,92 +1,99 @@
 [
     {
-      "ten_man_hinh": "Monitor Xiaomi 27 inch A27i ELA5345EU",
-      "gia": 1890000,
-      "tan_so_quet": "100 Hz",
-      "thoi_gian_phan_hoi": "6ms",
-      "ti_le_man_hinh": "16:9",
-      "cong_ket_noi": [
+      "name": "Màn hình Monitor Xiaomi 27 inch A27i ELA5345EU",
+      "price": 1890000,
+      "specs" : {
+      "Tần số quét": "100 Hz",
+      "Thời gian phản hồi": "6ms",
+      "Tỷ lệ màn hình": "16:9",
+      "Cổng kết nối": [
         "Display port ×1",
         "HDMI 2.0 port ×1",
         "DC IN cable port ×1"
       ],
-      "do_tuong_phan_tinh": "1000:1",
-      "goc_nhin": "178 (H) / 178 (V)",
-      "tam_nen": "IPS",
-      "tien_ich": [
+      "Độ tương phản": "1000:1",
+      "Góc nhìn": "178 (H) / 178 (V)",
+      "Tấm nền": "IPS",
+      "Tiện ích": [
         "Hạn chế ánh sáng xanh",
         "Chống chói",
         "Chống nháy"
       ],
-      "kich_thuoc_man_hinh": "27 inches",
-      "trong_luong": "3.6 kg",
-      "do_phan_giai_man_hinh": "1920 x 1080 pixels (FullHD)"
+      "Kích thước màn hình": "27 inches",
+      "Trọng lượng": "3.6 kg",
+      "Độ phân giải": "1920 x 1080 pixels (FullHD)"
+    }
     },
     {
-      "ten_man_hinh": "MSI Pro MP223 22 inch",
-      "gia": 1690000,
-      "tan_so_quet": "100 Hz",
-      "thoi_gian_phan_hoi": "1ms",
-      "ti_le_man_hinh": "16:9",
-      "cong_ket_noi": [
+      "name": "Màn hình MSI Pro MP223 22 inch",
+      "price": 1690000,
+      "specs": {
+      "Tần số quét": "100 Hz",
+      "Thời gian phản hồi": "1ms",
+      "Tỷ lệ màn hình": "16:9",
+      "Cổng kết nối": [
         "HDMI",
         "VGA"
       ],
-      "do_tuong_phan_tinh": "3000:1",
-      "goc_nhin": "178º ngang, 178º dọc",
-      "tam_nen": "VA",
-      "kich_thuoc_man_hinh": "22 inches",
-      "trong_luong": "4.3 kg",
-      "do_phan_giai_man_hinh": "1920 x 1080"
+      "Độ tương phản": "3000:1",
+      "Góc nhìn": "178º ngang, 178º dọc",
+      "Tấm nền": "VA",
+      "Kích thước màn hình": "22 inches",
+      "Trọng lượng": "4.3 kg",
+      "Độ phân giải": "1920 x 1080"
+    }
     },
     {
-      "ten_man_hinh": "LG UltraWide 29WQ600 29 inch",
-      "gia": 4990000,
-      "tan_so_quet": "100 Hz",
-      "thoi_gian_phan_hoi": "5ms",
-      "ti_le_man_hinh": "21:9",
-      "cong_ket_noi": [
+      "name": "Màn hình LG UltraWide 29WQ600 29 inch",
+      "price": 4990000,
+      "specs": {
+      "Tần số quét": "100 Hz",
+      "Thời gian phản hồi": "5ms",
+      "Tỷ lệ màn hình": "21:9",
+      "Cổng kết nối": [
         "HDMI",
         "DisplayPort",
         "USB-C"
       ],
-      "do_tuong_phan_tinh": "1000:1",
-      "goc_nhin": "178º ngang, 178º dọc",
-      "tam_nen": "IPS",
-      "tien_ich": [
+      "Độ tương phản": "1000:1",
+      "Góc nhìn": "178º ngang, 178º dọc",
+      "Tấm nền": "IPS",
+      "Tiện ích": [
         "Chống chói",
         "Chế độ chơi game",
         "Chống nháy"
       ],
-      "kich_thuoc_man_hinh": "29 inches",
-      "trong_luong": {
-        "co_chan_de": "4.5 kg",
-        "khong_chan_de": "4.0 kg"
-      },
-      "do_phan_giai_man_hinh": "2560 x 1080"
+      "Kích thước màn hình": "29 inches",
+      "Trọng lượng": [
+        "co_chan_de: 4.5 kg",
+        "khong_chan_de: 4.0 kg"
+      ],
+      "Độ phân giải": "2560 x 1080"
+    }
     },
     {
-      "ten_man_hinh": "LG Gaming 27 inch 27QN600",
-      "gia": 5290000,
-      "tan_so_quet": "75 Hz",
-      "thoi_gian_phan_hoi": "5ms",
-      "ti_le_man_hinh": "16:9",
-      "cong_ket_noi": [
+      "name": "Màn hình LG Gaming 27 inch 27QN600",
+      "price": 5290000,
+      "specs": {
+      "Tần số quét": "75 Hz",
+      "Thời gian phản hồi": "5ms",
+      "Tỷ lệ màn hình": "16:9",
+      "Cổng kết nối": [
         "HDMI x 2",
         "Tai nghe x 1"
       ],
-      "do_tuong_phan_tinh": "1000:1",
-      "goc_nhin": "178º(R/L), 178º(U/D)",
-      "tien_ich": [
+      "Độ tương phản": "1000:1",
+      "Góc nhìn": "178º(R/L), 178º(U/D)",
+      "Tiện ích": [
         "Chống chói",
         "Chống nháy"
       ],
-      "kich_thuoc_man_hinh": "27 inches",
-      "trong_luong": {
-        "khong_chan_de": "3.1 kg",
-        "co_chan_de": "3.4 kg"
-      },
-      "do_phan_giai_man_hinh": "2560 x 1440",
+      "Kích thước màn hình": "27 inches",
+      "Trọng lượng": [
+        "khong_chan_de: 3.1 kg",
+        "co_chan_de: 3.4 kg"
+      ],
+      "Độ phân giải": "2560 x 1440",
       "tinh_nang_khac": [
         "Màn hình IPS QHD (2560x1440)",
         "AMD FreeSync™",
@@ -95,36 +102,39 @@
         "Chế độ đọc sách",
         "Chống chớp hình"
       ]
+    }
     },
     {
-      "ten_man_hinh": "ASUS ProArt PA248QV 24.1 inch",
-      "gia": 4990000,
-      "tan_so_quet": "75 Hz",
-      "thoi_gian_phan_hoi": "5ms",
-      "ti_le_man_hinh": "16:10",
-      "cong_ket_noi": [
+      "name": "Màn hình đồ họa ASUS ProArt PA248QV 24.1 inch",
+      "price": 4990000,
+      "specs": {
+      "Tần số quét": "75 Hz",
+      "Thời gian phản hồi": "5ms",
+      "Tỷ lệ màn hình": "16:10",
+      "Cổng kết nối": [
         "Signal Input: HDMI, D-Sub, DisplayPort",
         "PC Audio Input : 3.5mm Mini-Jack",
         "Earphone jack : 3.5mm Mini-Jack",
         "USB Port(s) : 3.0x4"
       ],
       "do_tuong_phan_dong": "100000000:1",
-      "do_tuong_phan_tinh": "1000:1",
-      "goc_nhin": "178°(H)/178°(V)",
-      "tien_ich": [
+      "Độ tương phản": "1000:1",
+      "Góc nhìn": "178°(H)/178°(V)",
+      "Tiện ích": [
         "Chống chói"
       ],
-      "kich_thuoc_man_hinh": "24.1 inches",
-      "trong_luong": {
-        "voi_chan_de": "6.1 kg",
-        "khong_chan_de": "3.9 kg"
-      },
-      "do_phan_giai_man_hinh": "1920x1200 pixels",
+      "Kích thước màn hình": "24.1 inches",
+      "Trọng lượng": [
+        "voi_chan_de: 6.1 kg",
+        "khong_chan_de: 3.9 kg"
+      ],
+      "Độ phân giải": "1920x1200 pixels",
       "tinh_nang_khac": [
         "2W x 2 Stereo RMS",
         "VESA Wall Mounting",
         "Kensington lock"
       ]
+    }
     }
   ]
   
