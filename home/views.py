@@ -1,5 +1,5 @@
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
@@ -10,6 +10,7 @@ from Sales_website import settings
 from django.utils import timezone 
 import json
 from django.db.models import F, FloatField, ExpressionWrapper
+
 
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, View
@@ -36,7 +37,7 @@ from django.http import JsonResponse
 def search_suggestions(request):
     query = request.GET.get('query', '')
     if query:
-        products = Item.objects.filter(title__icontains=query)[:5]
+        products = Item.objects.filter(title__icontains=query)[:4]
         suggestions = []
         for product in products:
             suggestions.append({
@@ -292,20 +293,56 @@ def log_in(request):
     else:
         form = AuthenticationForm()
         return render(request, 'login.html')
+    
 
-def get_product(request,slug):
+
+from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
+import random
+from .models import Item, Order, RecentlyViewedItems
+from .recommendations import get_recommendations
+
+from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
+import random
+from .models import Item, Order, RecentlyViewedItems
+from .recommendations import get_recommendations, get_knn_recommendations
+
+def get_product(request, slug):
     product = Item.objects.get(slug=slug)
     template_name = "product-detail.html"
-    
+
+    # Track recently viewed items
+    if request.user.is_authenticated:
+        RecentlyViewedItems.objects.create(user=request.user, item=product, date=timezone.now())
+
+    # Content-Based Recommendations
+    content_recommendations = get_recommendations(product.title)
+    content_recommendation_items = Item.objects.filter(title__in=content_recommendations)
+
+    # Collaborative Filtering Recommendations
+    # collaborative_recommendations = get_knn_recommendations(product.id)
+    # collaborative_recommendation_items = Item.objects.filter(id__in=collaborative_recommendations)
+
+    context = {
+        'object': product,
+        'content_recommendation_items': content_recommendation_items,
+        # 'collaborative_recommendation_items': collaborative_recommendation_items
+    }
+
     if request.user.is_authenticated:
         try:
             order = Order.objects.get(user=request.user, ordered=False)
         except ObjectDoesNotExist:
-            order = Order.objects.create(user=request.user,ordered_date=timezone.now(),ref_code=random.randint(10000,99999) )
-            
-            return render(request,template_name,{'object':product,'order':order})
-    
-    return render(request,template_name,{'object':product})
+            order = Order.objects.create(user=request.user, ordered_date=timezone.now(), ref_code=random.randint(10000, 99999))
+            context['order'] = order
+
+    return render(request, template_name, context)
+
+
+
 
 def add_to_cart(request, slug):
     if request.user.is_authenticated :
