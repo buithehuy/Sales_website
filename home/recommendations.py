@@ -16,7 +16,7 @@ data = [
     }
     for item in items
 ]
-
+ 
 df = pd.DataFrame(data)
 
 # TF-IDF Vectorizer

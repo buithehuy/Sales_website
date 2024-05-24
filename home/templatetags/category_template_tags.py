@@ -70,21 +70,32 @@ def render_item_block(item, show_discount=False):
     discount_html = ""
     if show_discount and item.discount_price:
         discount_percentage = round(((item.price - item.discount_price) / item.price) * 100, 2)
-        discount_html = f"""
-            <div class="block2-price-wrapper" style="display: flex; align-items: center;">
-				<div style="flex: 1;">
-					<span class="block2-price m-text7 p-r-5">
-						{ item.price } ₫
-					</span>
-					<span class="block2-price m-text8 p-r-5">
-						{ item.discount_price } ₫
-					</span>
-				</div>
-					<div style="text-align: right; ">
-					    <span class="block2-discount-percentage m-text28 p-r-5 p-l-5" >-{discount_percentage}%</span>						
-					</div>
-			</div>
-        """
+        if item.discount_price != item.price:
+            discount_html = f"""
+                <div class="block2-price-wrapper" style="display: flex; align-items: center;">
+                    <div style="flex: 1;">
+                        <span class="block2-price m-text7 p-r-5">
+                            { item.price } ₫    
+                        </span>
+                        <span class="block2-price m-text8 p-r-5">
+                            { item.discount_price } ₫
+                        </span>
+                    </div>
+                        <div style="text-align: right; ">
+                            <span class="block2-discount-percentage m-text28 p-r-5 p-l-5" >-{discount_percentage}%</span>						
+                        </div>
+                </div>
+            """
+        else:
+            discount_html = f"""
+                <div class="block2-price-wrapper" style="display: flex; align-items: center;">
+                    <div style="flex: 1;">
+                        <span class="block2-price m-text6 p-r-5">
+                            { item.price } ₫
+                        </span>
+                    </div>
+                </div>
+            """
 # <span class="block2-discount-percentage m-text28" ">-{discount_percentage}%</span>
    
 

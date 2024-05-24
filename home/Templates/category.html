@@ -108,20 +108,20 @@
                                     </a>
                                     <div class="block2-price-wrapper" style="display: flex; align-items: center;">
                                         <div style="flex: 1;">
-                                            {% if item.discount_price %}
+                                            {% if item.discount_price  !=  item.price %}
                                             <span class="block2-price m-text7 p-r-5">
                                             {% else %}
                                             <span class="block2-price m-text6 p-r-5">
                                             {% endif %}
                                             {{ item.price }} ₫
                                             </span>
-                                            {% if item.discount_price %}
+                                            {% if item.discount_price  !=  item.price %}
                                             <span class="block2-price m-text8 p-r-5">
                                                 {{ item.discount_price }} ₫
                                             </span>
                                             {% endif %}
                                         </div>
-                                        {% if item.discount_price %}
+                                        {% if item.discount_price !=  item.price%}
                                         <div style="text-align: right;">
                                             <span class="block2-price m-text28 p-r-5 p-l-5">
                                                 -{{ item.discount_price|calculate_discount_percentage:item.price }}%
