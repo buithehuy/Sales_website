@@ -1,0 +1,53 @@
+[
+    {
+        "name": "Quạt tản nhiệt CM SickleFlow 120 ARGB Reverse Edition",
+        "price": "249000",
+        "specs": {
+            "Loại tản nhiệt": "Tản nhiệt khí",
+            "Số vòng quay của quạt": "650-1800 RPM ± 5%",
+            "Độ ồn (dBA)": "8 - 27 dBA",
+            "Tuổi thọ quạt": "160.000 giờ",
+            "Hãng sản xuất": "Cooler Master"
+        }
+    },
+    {
+        "name": "Tản nhiệt khí Xigmatek EPIX 1264 (EN41570)",
+        "price": "490000",
+        "specs": {
+            "Loại tản nhiệt": "Tản nhiệt khí",
+            "Số vòng quay của quạt": "800-1800 RPM +/- 10%",
+            "Độ ồn (dBA)": "< 23.8 dBA",
+            "Hãng sản xuất": "XIGMATEK"
+        }
+    },
+    {
+        "name": "Tản nhiệt DeepCool AG400 ARGB",
+        "price": "490000",
+        "specs": {
+            "Loại tản nhiệt": "Tản nhiệt khí",
+            "Số vòng quay của quạt": "500 ~ 2000 vòng / phút ± 10%",
+            "Độ ồn (dBA)": "≤31,6 dB (A)",
+            "Hãng sản xuất": "DeepCool"
+        }
+    },
+    {
+        "name": "Tản nhiệt nước AIO DeepCool LT520 High Performance Liquid",
+        "price": "2390000",
+        "specs": {
+            "Loại tản nhiệt": "Tản nhiệt nước",
+            "Số vòng quay của quạt": "500~2250 vòng/phút ±10%",
+            "Độ ồn (dBA)": "≤32.9 dB(A)",
+            "Hãng sản xuất": "DeepCool",
+            "Chất liệu": "Nhôm"
+        }
+    },
+    {
+        "name": "Quạt LED DeepCool FC 120-3 in 1 A-RGB (3 Pack)",
+        "price": "749000",
+        "specs": {
+            "Số vòng quay của quạt": "500~1800 RPM±10%",
+            "Độ ồn (dBA)": "≤28 dB(A)",
+            "Hãng sản xuất": "DeepCool"
+        }
+    }
+]

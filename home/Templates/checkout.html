@@ -1,0 +1,314 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
+
+{% block content %}
+
+
+   <style>
+/* checkbox settings 👇 */
+
+.ui-checkbox {
+  --primary-color: #1677ff;
+  --secondary-color: #fff;
+  --primary-hover-color: #4096ff;
+  /* checkbox */
+  --checkbox-diameter: 20px;
+  --checkbox-border-radius: 5px;
+  --checkbox-border-color: #d9d9d9;
+  --checkbox-border-width: 1px;
+  --checkbox-border-style: solid;
+  /* checkmark */
+  --checkmark-size: 1.2;
+}
+
+.ui-checkbox, 
+.ui-checkbox *, 
+.ui-checkbox *::before, 
+.ui-checkbox *::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ui-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: var(--checkbox-diameter);
+  height: var(--checkbox-diameter);
+  border-radius: var(--checkbox-border-radius);
+  background: var(--secondary-color);
+  border: var(--checkbox-border-width) var(--checkbox-border-style) var(--checkbox-border-color);
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+
+.ui-checkbox::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
+  box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
+  border-radius: inherit;
+  opacity: 0;
+  -webkit-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  -o-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+  transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+}
+
+.ui-checkbox::before {
+  top: 40%;
+  left: 50%;
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 7px;
+  border-right: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  opacity: 0;
+  -webkit-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+  -o-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+  transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+}
+
+/* actions */
+
+.ui-checkbox:hover {
+  border-color: var(--primary-color);
+}
+
+.ui-checkbox:checked {
+  background: var(--primary-color);
+  border-color: transparent;
+}
+
+.ui-checkbox:checked::before {
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  -webkit-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+  -o-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+  transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+}
+
+.ui-checkbox:active:not(:checked)::after {
+  -webkit-transition: none;
+  -o-transition: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  opacity: 1;
+}
+      
+.payment form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.payment label {
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+}
+
+.payment  label input {
+  position: absolute;
+  left: -9999px;
+}
+
+.payment label input:checked + span {
+  background-color: #414181;
+  color: white;
+}
+
+.payment label input:checked + span:before {
+  box-shadow: inset 0 0 0 0.4375em #00005c;
+}
+
+.payment label span {
+  display: flex;
+  align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em;
+  transition: 0.25s ease;
+  color: #414181;
+}
+
+.payment label span:hover {
+  background-color: #d6d6e5;
+}
+
+.payment label span:before {
+  display: flex;
+  flex-shrink: 0;
+  content: "";
+  background-color: #fff;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  margin-right: 0.375em;
+  transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em #00005c;
+}
+
+
+
+      .bd-placeholder-img { 
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+    
+}
+
+
+    </style>
+  
+ 
+    <div class="container">
+  {% comment %} <div class="py-5 text-center">
+    <img class="d-block mx-auto mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h2>Checkout form</h2>
+    <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+  </div> {% endcomment %}
+
+  <div class="row">
+
+
+    <div class="col-md-8 order-md-1 card" >
+    	
+      <h4 class="mb-3" style=" margin-top: 26px;"> Địa chỉ nhận hàng </h4>
+      <form method="POST" class="needs-validation" >
+      	{% csrf_token %}
+        <div class="mb-3">
+          <label for="address"> Địa chỉ cụ thể </label>
+          <input type="text" value="{{add_ship.address_detail}}" class="form-control" name="address"  required>
+
+        </div>
+
+        <div class="mb-3">
+          <label for="address2"> Địa chỉ 2 <span class="text-muted">(Không bắt buộc)</span></label>
+          <input type="text" value=" " class="form-control" name="address2">
+
+        </div>
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="city">Tỉnh/Thành phố</label>
+           		<input type="text" value="{{ add_ship.city }}" class="form-control" name="city"  required>
+            <div class="invalid-feedback">
+              Vui lòng nhập thành phố.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="district">Quận/Huyện</label>
+            <input type="text" value="{{ add_ship.district }}" class="form-control" name="district" required>
+            <div class="invalid-feedback">
+              Vui lòng chọn quận huyện.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="xa"> Xã </label>
+            <input type="text" value="{{add_ship.xa}}" class="form-control" name="xa" required>
+            
+            <div class="invalid-feedback">
+              Vui lòng chọn xã.
+            </div>
+          </div>
+          
+          <div class="col-md-3 mb-3">
+            <label for="phone"> Số điện thoại </label>
+            <input type="tel" name="telphone" class="form-control" value="{{add_ship.phone}}" pattern="[0-9]{10}"  title="Ten digits code" required/>  
+            
+            <div class="invalid-feedback">
+              Vui lòng chọn xã.
+            </div>
+          </div>
+
+        </div>
+        <hr class="mb-4">
+        
+        <div class="custom-control custom-checkbox">
+          <label >
+            <input type="checkbox" style="background-color: #4096ff;" name="save_address" class="ui-checkbox">
+            <span class="checkmark" style="margin-top: 20px;"> Lưu thông tin địa chỉ</span>
+          </label>
+        </div>
+        <hr class="mb-4">
+
+        <h4 class="mb-3">Phương thức thanh toán</h4>
+
+        <div class="d-block my-3">
+        	
+          <div class="custom-control custom-radio">
+            <div class="payment">
+                <label>
+                  <input type="radio" name="method" value="tt" checked="">
+                  <span>Thanh toán khi nhận hàng</span>
+                </label>
+                <label>
+                  <input type="radio" name="method" value="ck">
+                  <span>Chuyển khoản</span>
+                </label>
+              
+            </div>
+          </div>
+      
+        </div>
+        
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Tiếp tục thanh toán</button>
+      </form>
+    </div>
+
+    {% include "order_snippet.html" %}
+
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2017-2019 Company Name</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>
+</div>
+{% endblock content %}

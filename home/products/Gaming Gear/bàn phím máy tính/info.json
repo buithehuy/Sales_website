@@ -1,0 +1,83 @@
+[
+    {
+        "name": "Bàn phím cơ Dareu EK75 trắng đen",
+        "price": "599000",
+        "specs": {
+            "Loại bàn phím": "Tenkeyless",
+            "Số phím": "81 phím",
+            "Keycap": "ABS double injection",
+            "Tương thích": ["MacOS", "Windows"],
+            "Kết nối": "Dây USB to Type-C",
+            "Đèn LED": "LED RGB",
+            "Tiện ích": [
+                "Tích hợp tính năng anti-ghosting",
+                "Knob Button tinh chỉnh âm lượng",
+                "Cáp Type-C có thể tháo rời"
+            ],
+            "Hãng sản xuất": "DAREU"
+        }
+    },
+    {
+        "name": "Bàn phím Apple Magic Keyboard 2021 MK2A3",
+        "price": "2090000",
+        "specs": {
+            "Tương thích": ["MacOS", "PadOS"],
+            "Cách kết nối": "Bluetooth",
+            "Độ dài dây / Khoảng cách kết nối": "10m",
+            "Kích thước bàn phím": "Mini",
+            "Hãng sản xuất": "Apple Chính hãng"
+        }
+    },
+    {
+        "name": "Bàn phím cơ E-DRA không dây EK368L BK đen trắng Brown Switch",
+        "price": "499000",
+        "specs": {
+            "Số phím": "68 phím",
+            "Keycap": "ABS",
+            "Tương thích": ["MacOS", "Windows"],
+            "Kết nối": ["USB Receiver", "Bluetooth"],
+            "Tiện ích": [
+                "2 chế độ: Wireless 2.4G + Bluetooth (BT5.0)",
+                "Độ bền mỗi switch lên tới 50 triệu lượt nhấn",
+                "Tương thích với Win XP, Win7, Win8, Win10, hệ thống MAC"
+            ],
+            "Hãng sản xuất": "E-dra"
+        }
+    },
+    {
+        "name": "Bàn phím có dây Logitech K120",
+        "price": "165000",
+        "specs": {
+            "Tương thích": "Windows",
+            "Cách kết nối": "Dây cắm USB",
+            "Độ dài dây / Khoảng cách kết nối": "1.5 m",
+            "Kích thước bàn phím": "Fullsize",
+            "Đèn nền LED": "Không",
+            "Hãng sản xuất": "Logitech",
+            "Tính năng khác": [
+                "Bàn phím gõ thoải mái",
+                "Phím dễ đọc",
+                "Phím nhấn bền"
+            ]
+        }
+    },
+    {
+        "name": "Bàn phím cơ E-DRA không dây EK368L WH đen trắng Brown Switch",
+        "price": "499000",
+        "specs": {
+            "Số phím": "68 phím",
+            "Keycap": "ABS",
+            "Tương thích": ["MacOS", "Windows"],
+            "Kết nối": "Bluetooth",
+            "Tiện ích": [
+                "2 chế độ: Wireless 2.4G + Bluetooth (BT5.0)",
+                "Độ bền mỗi switch lên tới 50 triệu lượt nhấn",
+                "Tương thích với Win XP, Win7, Win8, Win10, hệ thống MAC",
+                "Công nghệ in DoubleShot siêu bền bỉ"
+            ],
+            "Hãng sản xuất": "E-dra"
+        }
+    }
+    
+    
+]

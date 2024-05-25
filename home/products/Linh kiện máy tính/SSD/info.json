@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Ổ cứng SSD Kingston NV2 M.2 PCIe Gen4 NVMe 1TB",
+        "price": "1890000",
+        "specs": {
+            "Loại": "Ổ cứng SSD",
+            "Kết nối": "M2 PCIe",
+            "Dung lượng": "1TB",
+            "Tốc độ đọc": "3500 MB/s",
+            "Hãng sản xuất": "Kingston"
+        }
+    },
+    {
+            "name": "Ổ cứng di động SSD Kingston XS1000 USB 3.2 Gen 2 1TB",
+            "price": "2190000",
+            "specs": {
+                "Loại": "Ổ cứng SSD",
+                "Dung lượng": "1TB",
+                "Kết nối": "USB 3.2 Gen 2",
+                "Tốc độ đọc": "1050 MB/s",
+                "Tốc độ ghi": "1000 MB/s",
+                "Hỗ trợ hệ điều hành": ["Windows® 11, 10", "macOS (v.10.15.x +)", "Linux (v. 4.4.x +)", "Chrome OS™"],
+                "Hãng sản xuất": "Sandisk"
+            }
+        
+    },
+    {
+        "name": "Ổ cứng SSD Kingston SA400S37 SATA 2.5 inch 240GB",
+        "price": "790000",
+        "specs": {
+            "Loại": "Ổ cứng SSD",
+            "Kết nối": "SATA III",
+            "Dung lượng": "240GB",
+            "Tốc độ đọc": "500 MB/s",
+            "Hãng sản xuất": "Kingston"
+        }
+    },
+    {
+        "name": "Ổ cứng di động SSD Samsung T7 Portable 1TB",
+        "price": "2990000",
+        "specs": {
+            "Loại": "Ổ cứng SSD",
+            "Dung lượng": "1TB",
+            "Kết nối": "USB 3.2",
+            "Tốc độ đọc": "1050 MB/s",
+            "Tốc độ ghi": "1000 MB/s",
+            "Hỗ trợ hệ điều hành": ["Windows 8", "Windows 8.1", "Windows 10", "macOS", "Windows 7", "Android"],
+            "Hãng sản xuất": "Samsung Chính hãng"
+        }
+    },
+    {
+        "name": "Ổ cứng SSD Samsung 980 PCIe NVMe 500GB",
+        "price": "1690000",
+        "specs": {
+            "Loại": "Ổ cứng SSD",
+            "Kết nối": "M2 PCIe",
+            "Dung lượng": "500GB",
+            "Tốc độ đọc": "3100 MB/s",
+            "Hãng sản xuất": "Samsung Chính hãng"
+        }
+    }  
+]

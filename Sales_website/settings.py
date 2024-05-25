@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 from .info import *
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -76,16 +76,27 @@ WSGI_APPLICATION = 'Sales_website.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+##### chạy trên docker
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "sales_website",
-        'USER': "root",
-        'PASSWORD': "",
-        'HOST': "localhost",
+        'NAME': 'sale_website',
+        'USER': 'your_username',
+        'PASSWORD': 'your_password',
+        'HOST': 'db',
+        'PORT': ''
     }
 }
+####### chạy trên  local
+# DATABASES = {
+#      'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': "sales_website",
+#         'USER': "root",
+#         'PASSWORD': "",
+#         'HOST': "localhost",
+#     }
+# }
 
 
 # Password validation
@@ -121,13 +132,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'productionfiles'
 
-STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'mystaticfiles'
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

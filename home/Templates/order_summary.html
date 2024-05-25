@@ -1,0 +1,73 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2> Đơn đặt hàng </h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Tên sảm phẩm</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số lượng</th>
+
+            <th scope="col">Tổng thanh toán</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order_item in object.items.all %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>
+			<img src="{{ order_item.item.image.url }}" style="width: 130px;"> 
+            </td>
+            <td>{{ order_item.item.title }}</td>
+            <td>{{ order_item.item.price }}</td>
+
+            <td>
+              <a href="{% url 'remove-single-item-from-cart' order_item.item.slug %}" style="margin: 0px"><i class="fas fa-minus mr-3"></i></a>{{ order_item.quantity }}<a href=" {% url 'add-to-cart' order_item.item.slug %}" style="margin: 0px"><i class="fas fa-plus ml-3"></i></a>
+            </td>
+            <td>
+              {% if order_item.item.discount_price %}
+                  ${{ order_item.get_total_discount_item_price}}
+                  <span class="badge badge-primary">  Tiết kiệm {{ order_item.get_amount_saved }} VNĐ</span>
+              {% else %}
+                  ${{ order_item.get_total_item_price}}
+              {% endif %}<a style="color: red" href="{% url 'remove-from-cart' order_item.item.slug %}"><i class="fas fa-trash float-right"></i></a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+			<td colspan="5"> Giỏ hàng của bạn trống</td>
+          </tr>
+        </tbody>
+        {% endfor %}
+        {% if object.coupon %}
+        <tr>
+          <td colspan="5"><b>Thêm mã giảm giá : </b></td>
+          <td>- ${{ object.coupon.amount }}</td>
+        </tr>
+        {% endif%}
+        {% if object.get_total %}
+        <tr>
+        	<td colspan="5"><b>Tổng thanh toán : </b></td>
+        	<td><b>${{ object.get_total }}</b></td>
+        </tr>
+        <tr>
+        	<td colspan="5">
+        		<a href="/checkout" class="btn btn-warning float-right ml-2">Tiếp tục</a>
+        		<a href="/" class="btn btn-primary float-right">Quay trở lại shop</a>
+
+        	</td>
+        </tr>
+        {% endif %}
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
