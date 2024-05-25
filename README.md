@@ -4,7 +4,7 @@
 - 22022661       - 22022667    -  22022562
 
 ### WEBSITE thương mại điện tự bán linh kiện máy tính.
-- Link demo : 
+- Link demo : https://www.youtube.com/watch?v=iUHA7fhtKcM
 - Được xây dựng bằng <a href = 'https://www.djangoproject.com/'> Django </a> 
 ### Cách chạy dự án: ( Yêu cầu máy tính cài đặt docker )
 - Xây dựng các image cần thiết.
